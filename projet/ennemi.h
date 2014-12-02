@@ -7,14 +7,17 @@ class Ennemi : public Personnage
 {
 private:
     int vision;
+    bool orientationVision;
 public:
-    Ennemi(int, QWidget*, int, int, int);
+    Ennemi(int, QWidget*, int=0, int=0, int=0, int=0, int=0, bool=false);
     ~Ennemi();
-    Ennemi(const Ennemi&);
-    Ennemi& operator=(const Ennemi&);
+    //Ennemi(const Ennemi&);
+    //Ennemi& operator=(const Ennemi&);
     void setVision(int);
     int getVision() const;
-    virtual void seDeplacer() = 0;
+    bool isOrientationVision()const;
+    void setOrientationVision();
+    virtual void seDeplacer(int) = 0;
 };
 
 #endif // ENNEMI_H

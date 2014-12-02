@@ -7,15 +7,27 @@ class Heros : public Personnage
 {
 private:
     bool repere, visible;
+    bool axeX;
+    bool axeY;
 public:
-    Heros(int, QWidget*, int=0, int=0, bool=false, bool=true);
+    Heros(int, QWidget*, int=0, int=0, int=0, int=0, bool=true, bool=false, bool=false, bool=true);
     ~Heros();
-    Heros(const Heros&);
-    Heros& operator=(const Heros&);
+    //Heros(const Heros&);
+    //Heros& operator=(const Heros&);
     void seCacher();
-    virtual void seDeplacer();
+
+    void seDeplacer(int);
+
     bool isVisible() const;
     bool isRepere() const;
+    void setRepere();
+
+
+    bool isAxeX() const;
+    bool isAxeY() const;
+
+    void setAxeX();
+    void setAxeY();
 
 };
 

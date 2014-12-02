@@ -1,7 +1,7 @@
-#include "decor.h"
+/*#include "decor.h"
 
-using std::string;
+using std::string;*/
 
-Decor::Decor(string nom, QWidget *parent, int x, int y) : Objet(nom, parent, x, y)
+/*Decor::Decor(string nom, QWidget *parent, int x, int y) : Objet(nom, parent, x, y)
 {
-}
+}*/

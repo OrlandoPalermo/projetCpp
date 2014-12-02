@@ -9,8 +9,8 @@ private:
 
 public:
     //Vision de 50 pixel par défaut
-    Majordhomme(int,  QWidget*, int=0, int=0, int=50);
-    virtual void seDeplacer();
+    Majordhomme(int,  QWidget*, int=0, int=0,int=0,int=0,int=50,bool=false);
+    void seDeplacer(int);
 };
 
 #endif // MAJORDHOMME_H
