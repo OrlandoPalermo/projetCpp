@@ -2,18 +2,15 @@
 
 using std::string;
 
-Decor::Decor(QWidget *parent, int xBasGauche, int xBasDroite, int yHautGauche, int yBasGauche) : QLabel(parent)
+Decor::Decor(string nom, QWidget *parent, int x, int y) : Objet(nom, parent, x, y)
 {
-    pixelsMontee = xBasGauche - yHautGauche;
-
     coordonnees = new QPoint;
-    coordonnees->setX(xBasGauche);
+    coordonnees->setX(x);
     //On se sert de la coordonnée de l'objet dans la map pour placer le QLabel invisible pour faire un test de collision
 
-    coordonnees->setY(yHautGauche);
+    coordonnees->setY(y);
     this->move(*coordonnees);
-    this->setFixedWidth(xBasDroite-xBasGauche);
-    this->setFixedHeight(yBasGauche-yHautGauche);
+
    // this->setStyleSheet("QLabel {background-color : red;}");
    // this->setText("APPARAIT!");
 }

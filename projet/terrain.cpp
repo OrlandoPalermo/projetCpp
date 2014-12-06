@@ -21,10 +21,12 @@ Terrain::Terrain() : QWidget()
     ennemis->push_back(new Majordhomme(2,this,870,540,53,73,10,false));
 
     decors = new vector<Decor*>;
-    decors->push_back(new Decor(this,672,728,530,610));
+    /*decors->push_back(new Decor(this,672,728,530,610));
     decors->push_back(new Decor(this,772,803,473,610));
-    decors->push_back(new Decor(this,870,957,393,446));
-
+    decors->push_back(new Decor(this,870,957,393,446));*/
+    decors->push_back(new Armoire("Armoire", this, 672, 530));
+    decors->push_back(new Echelle("Echelle", this, 772, 473));
+    //decors->push_back(new Porte(this, 870, 393));
 
     listeRepere = new vector<Ennemi*>; // liste des ennemis ayant repere le heros
 
@@ -58,15 +60,15 @@ Terrain::Terrain() : QWidget()
 Terrain::~Terrain()
 {
     delete heros;
+
+    for (int i(0); i < ennemis->size(); i++)
+        delete (*ennemis)[i];
+
+    for (int i(0); i < decors->size(); i++)
+        delete (*decors)[i];
+
     delete ennemis;
-    delete timer;
     delete listeRepere;
-    delete sensTimerRonde;
-    delete dureeSensDeplacement;
-    delete animation;
-    delete fond;
-    delete labFond;
-    delete mario;
     delete decors;
 }
 

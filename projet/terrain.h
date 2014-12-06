@@ -7,8 +7,8 @@
 #include "vector"
 #include "majordhomme.h"
 #include "heros.h"
-//#include "echelle.h"
-//#include "armoire.h"
+#include "echelle.h"
+#include "armoire.h"
 #include <QTimer>
 #include <QKeyEvent>
 #include <QMessageBox>
@@ -28,7 +28,6 @@ private:
     QTimer* dureeSensDeplacement;
     QTimer *animation;
     QPixmap *fond;
-    QPixmap *mario;
     QLabel *labFond;
 public:
     Terrain();

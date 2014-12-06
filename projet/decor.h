@@ -1,17 +1,17 @@
 #ifndef DECOR_H
 #define DECOR_H
 
-//#include <objet.h>
+#include <objet.h>
 #include <QLabel>
 #include <QPoint>
-class Decor : public QLabel
+
+class Decor : public Objet
 {
 private:
-    //virtual void abstract() = 0;
-    int pixelsMontee;
+    virtual void abstract() = 0;
     QPoint *coordonnees;
 public:
-    Decor(QWidget *, int, int, int, int );
+    Decor(std::string, QWidget *, int, int);
     ~Decor();
 
     int getX();

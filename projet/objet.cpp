@@ -1,8 +1,8 @@
-/*#include "objet.h"
+#include "objet.h"
 
-using std::string;*/
+using std::string;
 
-/*Objet::Objet(string nom, QWidget *parent, int x, int y) : QLabel(parent)
+Objet::Objet(string nom, QWidget *parent, int x, int y) : QLabel(parent)
 {
     this->nom = nom;
     coordonnees = new QPoint(x, y);
@@ -46,4 +46,4 @@ void Objet::setY(int y) {
 
 void Objet::coordonneesMaj() {
     move(getX(), getY());
-}*/
+}
