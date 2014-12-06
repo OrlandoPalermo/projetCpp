@@ -29,6 +29,10 @@ public:
     void setAxeX();
     void setAxeY();
 
+    virtual void remplacerSprite(int);
+    void animer();
+    void spriteReset();
+
 };
 
 #endif // HEROS_H

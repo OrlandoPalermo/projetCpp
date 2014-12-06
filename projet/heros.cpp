@@ -8,6 +8,7 @@ Heros::Heros(int vitesse, QWidget* parent, int x, int y, int l, int h, bool axeX
     this->visible = visible;
     this->axeX = axeX;
     this->axeY = axeY;
+    this->setFixedSize(l,h);
 }
 
 /*Heros::Heros(const Heros &h) : Personnage(h) {
@@ -34,6 +35,7 @@ void Heros::seDeplacer(int direction) {
     case 1 : if ( this->isAxeX() == true )
         {
         Personnage::setX(Personnage::getX() + Personnage::getVitesseDeplacement()); // deplacement du heros à droite
+        this->animer();
         }
         break;
     case 2 : if ( this->isAxeX() == true )
@@ -86,4 +88,40 @@ void Heros::setAxeX()
 void Heros::setAxeY()
 {
     this->axeY = !axeY;
+}
+
+void Heros::remplacerSprite(int numPhoto)
+{
+    switch(numPhoto)
+    {
+        case 1 : this->setPixmap(*(new QPixmap("Marios\\mario_droite.png"))); break;
+        case 2 : this->setPixmap(*(new QPixmap("Marios\\mario_gauche.png"))); break;
+    }
+}
+
+void Heros::animer()
+{
+    if(this->getNumImage()==0)
+    {
+        this->setNumImage(1);
+        this->remplacerSprite(this->getNumImage());
+    }
+    else if(this->getNumImage()==1)
+    {
+        this->setNumImage(2);
+        this->remplacerSprite(this->getNumImage());
+    }
+    else
+    {
+        this->setNumImage(1);
+        this->remplacerSprite(this->getNumImage());
+    }
+
+}
+
+/*Appel de cette méthode pour arrêter Mario lorsque l'utilisateur relâche la touche*/
+void Heros::spriteReset()
+{
+    this->setNumImage(0);
+    this->setPixmap(*(new QPixmap("Marios\\mario_inactif.png")));
 }

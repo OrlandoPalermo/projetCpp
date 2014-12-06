@@ -14,6 +14,7 @@ public:
     //Ennemi(const Ennemi&);
     //Ennemi& operator=(const Ennemi&);
     void setVision(int);
+    virtual void remplacerSprite(int)= 0;
     int getVision() const;
     bool isOrientationVision()const;
     void setOrientationVision();

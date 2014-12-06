@@ -12,6 +12,7 @@
 #include <QTimer>
 #include <QKeyEvent>
 #include <QMessageBox>
+#include "decor.h"
 
 class Terrain : public QWidget
 {
@@ -20,16 +21,21 @@ private:
     Heros *heros;
     std::vector<Ennemi*>* ennemis;
     std::vector<Ennemi*>* listeRepere;
-    //std::vector<Decor*>* decors;
+    std::vector<Decor*>* decors;
 
     QTimer* timer;
     QTimer* sensTimerRonde;
     QTimer* dureeSensDeplacement;
+    QTimer *animation;
+    QPixmap *fond;
+    QPixmap *mario;
+    QLabel *labFond;
 public:
     Terrain();
     ~Terrain();
 
     virtual void keyPressEvent(QKeyEvent *);
+    virtual void keyReleaseEvent(QKeyEvent *);
     //virtual void keyReleaseEvent(QKeyEvent *);
     void messageUtilisateur();
 

@@ -1,17 +1,36 @@
-#include "terrain.h"
+﻿#include "terrain.h"
 #include <vector>
 
 using namespace std;
 Terrain::Terrain() : QWidget()
 {
-    this->setFixedSize(800,700);
 
+    labFond = new QLabel(this); //QLabel représentant le contenur de l'image de fond du stage
+    this->setFixedSize(960,720);
 
-    heros = new Heros(5,this,200,200,50,50,true,false,false,true); // arg1 : vitesse , arg2 : parent => terrain , arg3 et arg4 coordonnées x et y , arg5 : repéré , arg6 : visible
+    timer= new QTimer(this);
+
+    fond = new QPixmap("Terrain_1Ref.png"); //QPixmap représentante l'image de fond en elle-même
+    /*Note aux programmeurs : pour pouvoir mettre une image en chemin relatif, il est absolument impératif
+     * de placer les images dans le dossier "build" du projet et non dans le dossier "projet" lui-même */
+
+    labFond->setPixmap(*fond);
+
+    heros = new Heros(5,this,108,575,23,42,true,false,false,true); // arg1 : vitesse , arg2 : parent => terrain , arg3 et arg4 coordonnées x et y , arg5 : repéré , arg6 : visible
+    mario = new QPixmap("Marios\\mario_inactif.png");
+
+    heros->setPixmap(*mario);
 
     ennemis = new vector<Ennemi*>; // liste d'ennemis
-    ennemis->push_back(new Majordhomme(2,this,10,10,40,40,10,false));
-    ennemis->push_back(new Majordhomme(2,this,400,200,40,40,10,false));
+    ennemis->push_back(new Majordhomme(2,this,700,375,53,73,10,false));
+    ennemis->push_back(new Majordhomme(2,this,870,540,53,73,10,false));
+    (*ennemis)[0]->setPixmap(*(new QPixmap("Predator.png")));
+   (*ennemis)[1]->setPixmap(*(new QPixmap("Predator.png")));
+
+    decors = new vector<Decor*>;
+    decors->push_back(new Decor(this,672,728,530,610));
+    decors->push_back(new Decor(this,772,803,473,610));
+    decors->push_back(new Decor(this,870,957,393,446));
 
 
     listeRepere = new vector<Ennemi*>; // liste des ennemis ayant repere le heros
@@ -58,6 +77,11 @@ Terrain::~Terrain()
     delete listeRepere;
     delete sensTimerRonde;
     delete dureeSensDeplacement;
+    delete animation;
+    delete fond;
+    delete labFond;
+    delete mario;
+    delete decors;
 }
 
 void Terrain::testColission()
@@ -116,13 +140,14 @@ void Terrain::testColission()
 void Terrain::keyPressEvent(QKeyEvent *event)
 {
 
-
     switch(event->key())
     {
     case Qt::Key_Right :
-        heros->seDeplacer(1);
 
-        break;
+         heros->seDeplacer(1);break;
+
+
+
     case Qt::Key_Left :
         heros->seDeplacer(2);
 
@@ -132,10 +157,16 @@ void Terrain::keyPressEvent(QKeyEvent *event)
 
         break;
     case Qt::Key_Up :
+        if(heros->getX()>= (*decors)[1]->getX())
+        {
+            heros->setAxeY();
+        }
         heros->seDeplacer(3);
+
 
         break;
     }
+
 
 
 }
@@ -180,7 +211,27 @@ void Terrain::ajouterEnnemisRepere(Ennemi* e)
     // ps : pas faire attention au message
 }
 
+void Terrain::keyReleaseEvent(QKeyEvent *event)
+{
+    //Utilisation de event->ignore() pour éviter que les sprites ne se bloquent si l'utilisateur reste appuyé
+    if(event->isAutoRepeat())
+    {
+        event->ignore();
+    }
+
+    //Si l'utilisateur relâche le KeyEvent pour de bon alors Mario revient à son sprite statique de départ
+    else
+    {
+      heros->spriteReset();
+    }
+
+          //heros->spriteReset();
+
+
+}
+
 /*void Terrain::retirerEnnemisRepere()
 {
 
 }*/
+

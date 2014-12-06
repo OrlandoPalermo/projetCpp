@@ -16,7 +16,7 @@ private:
     int l;
     int h;
     int* id;
-
+    int numImage;
     static int nbPersonnage;
 
 public:
@@ -26,6 +26,7 @@ public:
     //Personnage(const Personnage&);
     //Personnage& operator=(const Personnage&);
     virtual void seDeplacer(int) = 0; // mettre un parametre chiffre pour le sens si heros keypressed si ennemis orientationVision
+    virtual void remplacerSprite(int)= 0;
     void setVitesseDeplacement(int);
     int getVitesseDeplacement() const;
     int getX() const;
@@ -38,7 +39,8 @@ public:
 
     int* getId()const;
 
-
+    int getNumImage()const;
+    void setNumImage(int); // va servir pour remplacer les sprites
     static int getNbPersonnage(){return nbPersonnage;}
 
 

@@ -6,7 +6,7 @@ Personnage::Personnage(int vDepl, QWidget *parent, int x, int y, int l, int h) :
     coordonneesMaj();
     this->l = l;
     this->h = h;
-
+    numImage = 0;
     id = new int;
     *id = nbPersonnage++;
 
@@ -14,9 +14,6 @@ Personnage::Personnage(int vDepl, QWidget *parent, int x, int y, int l, int h) :
 
     QObject::connect(this, SIGNAL(coordonneesChanged()), this, SLOT(coordonneesMaj()));
 
-    this->setStyleSheet("background-color:skyblue;");
-    this->setMinimumSize(this->l,this->h);
-    this->setMaximumSize(this->l,this->h);
 
 }
 
@@ -80,5 +77,14 @@ int* Personnage::getId()const {
     return this->id;
 }
 
+int Personnage::getNumImage()const
+{
+    return numImage;
+}
+
+void Personnage::setNumImage(int num)
+{
+    numImage = num;
+}
 
 

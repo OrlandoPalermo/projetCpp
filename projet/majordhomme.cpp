@@ -19,3 +19,8 @@ void Majordhomme::seDeplacer(int direction) {
         break;
     }
 }
+
+void Majordhomme::remplacerSprite(int num)
+{
+
+}
