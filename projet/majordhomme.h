@@ -2,6 +2,7 @@
 #define MAJORDHOMME_H
 
 #include "ennemi.h"
+#include "QLabel"
 
 class Majordhomme : public Ennemi
 {

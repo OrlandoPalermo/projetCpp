@@ -9,6 +9,7 @@ Heros::Heros(int vitesse, QWidget* parent, int x, int y, int l, int h, bool axeX
     this->axeX = axeX;
     this->axeY = axeY;
     this->setFixedSize(l,h);
+    setPixmap(QPixmap("Marios/mario_inactif.png"));
 }
 
 /*Heros::Heros(const Heros &h) : Personnage(h) {
@@ -94,8 +95,8 @@ void Heros::remplacerSprite(int numPhoto)
 {
     switch(numPhoto)
     {
-        case 1 : this->setPixmap(*(new QPixmap("Marios\\mario_droite.png"))); break;
-        case 2 : this->setPixmap(*(new QPixmap("Marios\\mario_gauche.png"))); break;
+        case 1 : this->setPixmap(*(new QPixmap("Marios/mario_droite.png"))); break;
+        case 2 : this->setPixmap(*(new QPixmap("Marios/mario_gauche.png"))); break;
     }
 }
 
@@ -123,5 +124,5 @@ void Heros::animer()
 void Heros::spriteReset()
 {
     this->setNumImage(0);
-    this->setPixmap(*(new QPixmap("Marios\\mario_inactif.png")));
+    this->setPixmap(*(new QPixmap("Marios/mario_inactif.png")));
 }

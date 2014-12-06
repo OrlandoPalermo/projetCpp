@@ -3,7 +3,7 @@
 Majordhomme::Majordhomme(int vitesse, QWidget* parent, int x, int y, int l, int h, int vision, bool orientationVision) : Ennemi(vitesse, parent, x, y, l, h, vision, orientationVision)
 {
     //insertion de l'image du majordhomme ici
-
+    setPixmap(QPixmap("Predator.png"));
 }
 
 void Majordhomme::seDeplacer(int direction) {

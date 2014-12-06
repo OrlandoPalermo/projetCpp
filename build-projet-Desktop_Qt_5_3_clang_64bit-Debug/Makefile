@@ -57,7 +57,7 @@ SOURCES       = ../projet/main.cpp \
 		../projet/echelle.cpp \
 		../projet/armoire.cpp moc_mainwindow.cpp \
 		moc_personnage.cpp \
-		moc_objet.cpp
+		moc_terrain.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		personnage.o \
@@ -71,7 +71,7 @@ OBJECTS       = main.o \
 		armoire.o \
 		moc_mainwindow.o \
 		moc_personnage.o \
-		moc_objet.o
+		moc_terrain.o
 DIST          = /Users/orlandopalermo/Qt/5.3/clang_64/mkspecs/features/spec_pre.prf \
 		/Users/orlandopalermo/Qt/5.3/clang_64/mkspecs/qdevice.pri \
 		/Users/orlandopalermo/Qt/5.3/clang_64/mkspecs/features/device_config.prf \
@@ -527,9 +527,9 @@ compiler_objective_c_make_all:
 compiler_objective_c_clean:
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_personnage.cpp moc_objet.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_personnage.cpp moc_terrain.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_personnage.cpp moc_objet.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_personnage.cpp moc_terrain.cpp
 moc_mainwindow.cpp: /Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QMainWindow \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qmainwindow.h \
 		../projet/mainwindow.h
@@ -541,17 +541,32 @@ moc_personnage.cpp: /Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framewor
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qlabel.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QPoint \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qpoint.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QPixmap \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/qpixmap.h \
 		../projet/personnage.h
 	/Users/orlandopalermo/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/orlandopalermo/Qt/5.3/clang_64/mkspecs/macx-clang -I'/Users/orlandopalermo/Documents/School/Helha/3- Third Year/C++/Projet/Code Source/projetCpp/projet' -I/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Headers -I. -F/Users/orlandopalermo/Qt/5.3/clang_64/lib ../projet/personnage.h -o moc_personnage.cpp
 
-moc_objet.cpp: /Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QWidget \
+moc_terrain.cpp: /Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QWidget \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qwidget.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QLabel \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qlabel.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QPixmap \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/qpixmap.h \
+		../projet/majordhomme.h \
+		../projet/ennemi.h \
+		../projet/personnage.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QPoint \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qpoint.h \
-		../projet/objet.h
-	/Users/orlandopalermo/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/orlandopalermo/Qt/5.3/clang_64/mkspecs/macx-clang -I'/Users/orlandopalermo/Documents/School/Helha/3- Third Year/C++/Projet/Code Source/projetCpp/projet' -I/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Headers -I. -F/Users/orlandopalermo/Qt/5.3/clang_64/lib ../projet/objet.h -o moc_objet.cpp
+		../projet/heros.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QTimer \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qtimer.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QKeyEvent \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/qevent.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QMessageBox \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qmessagebox.h \
+		../projet/decor.h \
+		../projet/terrain.h
+	/Users/orlandopalermo/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/orlandopalermo/Qt/5.3/clang_64/mkspecs/macx-clang -I'/Users/orlandopalermo/Documents/School/Helha/3- Third Year/C++/Projet/Code Source/projetCpp/projet' -I/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Headers -I. -F/Users/orlandopalermo/Qt/5.3/clang_64/lib ../projet/terrain.h -o moc_terrain.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -578,15 +593,26 @@ main.o: ../projet/main.cpp ../projet/mainwindow.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qmainwindow.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QApplication \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qapplication.h \
-		../projet/majordhomme.h \
-		../projet/ennemi.h \
-		../projet/personnage.h \
+		../projet/terrain.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QWidget \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qwidget.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QLabel \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qlabel.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QPixmap \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/qpixmap.h \
+		../projet/majordhomme.h \
+		../projet/ennemi.h \
+		../projet/personnage.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QPoint \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qpoint.h
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qpoint.h \
+		../projet/heros.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QTimer \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qtimer.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QKeyEvent \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/qevent.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QMessageBox \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qmessagebox.h \
+		../projet/decor.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../projet/main.cpp
 
 mainwindow.o: ../projet/mainwindow.cpp ../projet/mainwindow.h \
@@ -601,7 +627,9 @@ personnage.o: ../projet/personnage.cpp ../projet/personnage.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QLabel \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qlabel.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QPoint \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qpoint.h
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qpoint.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QPixmap \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/qpixmap.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o personnage.o ../projet/personnage.cpp
 
 heros.o: ../projet/heros.cpp ../projet/heros.h \
@@ -611,7 +639,9 @@ heros.o: ../projet/heros.cpp ../projet/heros.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QLabel \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qlabel.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QPoint \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qpoint.h
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qpoint.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QPixmap \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/qpixmap.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o heros.o ../projet/heros.cpp
 
 ennemi.o: ../projet/ennemi.cpp ../projet/ennemi.h \
@@ -621,7 +651,9 @@ ennemi.o: ../projet/ennemi.cpp ../projet/ennemi.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QLabel \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qlabel.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QPoint \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qpoint.h
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qpoint.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QPixmap \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/qpixmap.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ennemi.o ../projet/ennemi.cpp
 
 majordhomme.o: ../projet/majordhomme.cpp ../projet/majordhomme.h \
@@ -632,61 +664,28 @@ majordhomme.o: ../projet/majordhomme.cpp ../projet/majordhomme.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QLabel \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qlabel.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QPoint \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qpoint.h
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qpoint.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QPixmap \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/qpixmap.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o majordhomme.o ../projet/majordhomme.cpp
 
-terrain.o: ../projet/terrain.cpp ../projet/terrain.h \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QWidget \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qwidget.h \
-		../projet/majordhomme.h \
-		../projet/ennemi.h \
-		../projet/personnage.h \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QLabel \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qlabel.h \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QPoint \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qpoint.h \
-		../projet/heros.h
+terrain.o: ../projet/terrain.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o terrain.o ../projet/terrain.cpp
 
-objet.o: ../projet/objet.cpp ../projet/objet.h \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QWidget \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qwidget.h \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QLabel \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qlabel.h \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QPoint \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qpoint.h
+objet.o: ../projet/objet.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o objet.o ../projet/objet.cpp
 
 decor.o: ../projet/decor.cpp ../projet/decor.h \
-		../projet/objet.h \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QWidget \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qwidget.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QLabel \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qlabel.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QPoint \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qpoint.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o decor.o ../projet/decor.cpp
 
-echelle.o: ../projet/echelle.cpp ../projet/echelle.h \
-		../projet/decor.h \
-		../projet/objet.h \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QWidget \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qwidget.h \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QLabel \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qlabel.h \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QPoint \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qpoint.h
+echelle.o: ../projet/echelle.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o echelle.o ../projet/echelle.cpp
 
-armoire.o: ../projet/armoire.cpp ../projet/armoire.h \
-		../projet/decor.h \
-		../projet/objet.h \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QWidget \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qwidget.h \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QLabel \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qlabel.h \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QPoint \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qpoint.h
+armoire.o: ../projet/armoire.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o armoire.o ../projet/armoire.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
@@ -695,8 +694,8 @@ moc_mainwindow.o: moc_mainwindow.cpp
 moc_personnage.o: moc_personnage.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_personnage.o moc_personnage.cpp
 
-moc_objet.o: moc_objet.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_objet.o moc_objet.cpp
+moc_terrain.o: moc_terrain.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_terrain.o moc_terrain.cpp
 
 ####### Install
 

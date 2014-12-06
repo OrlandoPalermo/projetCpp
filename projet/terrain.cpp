@@ -1,14 +1,12 @@
 ﻿#include "terrain.h"
+#include <QApplication>
 #include <vector>
 
 using namespace std;
 Terrain::Terrain() : QWidget()
 {
-
     labFond = new QLabel(this); //QLabel représentant le contenur de l'image de fond du stage
     this->setFixedSize(960,720);
-
-    timer= new QTimer(this);
 
     fond = new QPixmap("Terrain_1Ref.png"); //QPixmap représentante l'image de fond en elle-même
     /*Note aux programmeurs : pour pouvoir mettre une image en chemin relatif, il est absolument impératif
@@ -17,15 +15,10 @@ Terrain::Terrain() : QWidget()
     labFond->setPixmap(*fond);
 
     heros = new Heros(5,this,108,575,23,42,true,false,false,true); // arg1 : vitesse , arg2 : parent => terrain , arg3 et arg4 coordonnées x et y , arg5 : repéré , arg6 : visible
-    mario = new QPixmap("Marios\\mario_inactif.png");
-
-    heros->setPixmap(*mario);
 
     ennemis = new vector<Ennemi*>; // liste d'ennemis
     ennemis->push_back(new Majordhomme(2,this,700,375,53,73,10,false));
     ennemis->push_back(new Majordhomme(2,this,870,540,53,73,10,false));
-    (*ennemis)[0]->setPixmap(*(new QPixmap("Predator.png")));
-   (*ennemis)[1]->setPixmap(*(new QPixmap("Predator.png")));
 
     decors = new vector<Decor*>;
     decors->push_back(new Decor(this,672,728,530,610));
@@ -35,37 +28,30 @@ Terrain::Terrain() : QWidget()
 
     listeRepere = new vector<Ennemi*>; // liste des ennemis ayant repere le heros
 
+    //Initialisation et configuration des timers
+    //-------------------------------------------
 
     timer = new QTimer(this); // timer de colission
-
     timer->setInterval(50); // permet de gérer l'intervalle entre chaque répétitions
 
-    QObject::connect( timer, SIGNAL( timeout() ), this, SLOT(  testColission() ) ) ;
-
-
-
-
     sensTimerRonde = new QTimer(this); // timer pour le changement de direction des ennemis
-
     sensTimerRonde->setInterval(5000);
 
-    QObject::connect( sensTimerRonde, SIGNAL( timeout() ), this, SLOT(  changeSensDeplacementEnnemis() ) ) ;
-
-
-
     dureeSensDeplacement = new QTimer(this); //  timer pour la ronde des ennemis
-
     dureeSensDeplacement->setInterval(50);
 
+    //Liaisons signaux et slots
+    //--------------------------
+
+    QObject::connect( timer, SIGNAL( timeout() ), this, SLOT(  testColission() ) ) ;
+    QObject::connect( sensTimerRonde, SIGNAL( timeout() ), this, SLOT(  changeSensDeplacementEnnemis() ) ) ;
     QObject::connect( dureeSensDeplacement, SIGNAL( timeout() ), this, SLOT(  deplacementEnnemis() ) ) ;
 
+    //Démarrage des timers
+    //---------------------
 
-
-
-    timer->start(); // démare le timer
-
+    timer->start();
     sensTimerRonde->start();
-
     dureeSensDeplacement->start();
 
 }
