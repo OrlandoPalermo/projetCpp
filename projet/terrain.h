@@ -7,6 +7,7 @@
 #include "vector"
 #include "majordhomme.h"
 #include "heros.h"
+#include "porte.h"
 #include <QTimer>
 #include <QKeyEvent>
 #include <QMessageBox>
@@ -30,6 +31,11 @@ private:
     QTimer *animation;
     QPixmap *fond;
     QLabel *labFond;
+    bool activeKeyE;
+    int coordDepartHerosX;
+    int coordDepartHerosY;
+
+    int niveauEnCours;
 public:
     Terrain();
     ~Terrain();
@@ -40,12 +46,21 @@ public:
     void messageUtilisateur();
 
     void ajouterEnnemisRepere(Ennemi *);
+    void init(int=0);
+    void niveauSuivant();
     //void retirerEnnemisRepere();
+
+signals:
+    void comportementDecor(Decor*);
+    void toucheParEnnemi();
+
 
 public slots:
     void testColission();
     void changeSensDeplacementEnnemis();
     void deplacementEnnemis();
+    void comportementDecorAction(Decor*);
+    void resetNiveau();
 };
 
 #endif // TERRAIN_H

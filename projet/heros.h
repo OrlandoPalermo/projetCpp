@@ -18,16 +18,17 @@ public:
 
     void seDeplacer(int);
 
+
     bool isVisible() const;
     bool isRepere() const;
+    void setVisibleClasse(bool);
     void setRepere();
-
 
     bool isAxeX() const;
     bool isAxeY() const;
 
     void setAxeX();
-    void setAxeY();
+    void setAxeY(bool);
 
     virtual void remplacerSprite(int);
     void animer();

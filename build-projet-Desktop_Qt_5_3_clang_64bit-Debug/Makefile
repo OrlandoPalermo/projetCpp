@@ -55,7 +55,8 @@ SOURCES       = ../projet/main.cpp \
 		../projet/objet.cpp \
 		../projet/decor.cpp \
 		../projet/echelle.cpp \
-		../projet/armoire.cpp moc_mainwindow.cpp \
+		../projet/armoire.cpp \
+		../projet/porte.cpp moc_mainwindow.cpp \
 		moc_personnage.cpp \
 		moc_terrain.cpp \
 		moc_objet.cpp
@@ -70,6 +71,7 @@ OBJECTS       = main.o \
 		decor.o \
 		echelle.o \
 		armoire.o \
+		porte.o \
 		moc_mainwindow.o \
 		moc_personnage.o \
 		moc_terrain.o \
@@ -200,7 +202,8 @@ DIST          = /Users/orlandopalermo/Qt/5.3/clang_64/mkspecs/features/spec_pre.
 		../projet/objet.cpp \
 		../projet/decor.cpp \
 		../projet/echelle.cpp \
-		../projet/armoire.cpp
+		../projet/armoire.cpp \
+		../projet/porte.cpp
 QMAKE_TARGET  = projet
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = projet.app/Contents/MacOS/projet
@@ -504,7 +507,7 @@ projet.app/Contents/Info.plist:
 	@sed -e "s,@SHORT_VERSION@,1.0,g" -e "s,@TYPEINFO@,????,g" -e "s,@ICON@,,g" -e "s,@BUNDLEIDENTIFIER@,com.yourcompany.projet,g" -e "s,@EXECUTABLE@,projet,g" -e "s,@TYPEINFO@,????,g" /Users/orlandopalermo/Qt/5.3/clang_64/mkspecs/macx-clang/Info.plist.app >projet.app/Contents/Info.plist
 dist: 
 	@test -d .tmp/projet1.0.0 || mkdir -p .tmp/projet1.0.0
-	$(COPY_FILE) --parents $(DIST) .tmp/projet1.0.0/ && $(COPY_FILE) --parents ../projet/mainwindow.h ../projet/personnage.h ../projet/heros.h ../projet/ennemi.h ../projet/majordhomme.h ../projet/terrain.h ../projet/objet.h ../projet/decor.h ../projet/echelle.h ../projet/armoire.h .tmp/projet1.0.0/ && $(COPY_FILE) --parents ../projet/main.cpp ../projet/mainwindow.cpp ../projet/personnage.cpp ../projet/heros.cpp ../projet/ennemi.cpp ../projet/majordhomme.cpp ../projet/terrain.cpp ../projet/objet.cpp ../projet/decor.cpp ../projet/echelle.cpp ../projet/armoire.cpp .tmp/projet1.0.0/ && $(COPY_FILE) --parents ../projet/mainwindow.ui .tmp/projet1.0.0/ && (cd `dirname .tmp/projet1.0.0` && $(TAR) projet1.0.0.tar projet1.0.0 && $(COMPRESS) projet1.0.0.tar) && $(MOVE) `dirname .tmp/projet1.0.0`/projet1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/projet1.0.0
+	$(COPY_FILE) --parents $(DIST) .tmp/projet1.0.0/ && $(COPY_FILE) --parents ../projet/mainwindow.h ../projet/personnage.h ../projet/heros.h ../projet/ennemi.h ../projet/majordhomme.h ../projet/terrain.h ../projet/echelle.h ../projet/armoire.h ../projet/objet.h ../projet/decor.h ../projet/porte.h .tmp/projet1.0.0/ && $(COPY_FILE) --parents ../projet/main.cpp ../projet/mainwindow.cpp ../projet/personnage.cpp ../projet/heros.cpp ../projet/ennemi.cpp ../projet/majordhomme.cpp ../projet/terrain.cpp ../projet/objet.cpp ../projet/decor.cpp ../projet/echelle.cpp ../projet/armoire.cpp ../projet/porte.cpp .tmp/projet1.0.0/ && $(COPY_FILE) --parents ../projet/mainwindow.ui .tmp/projet1.0.0/ && (cd `dirname .tmp/projet1.0.0` && $(TAR) projet1.0.0.tar projet1.0.0 && $(COMPRESS) projet1.0.0.tar) && $(MOVE) `dirname .tmp/projet1.0.0`/projet1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/projet1.0.0
 
 
 clean:compiler_clean 
@@ -560,16 +563,17 @@ moc_terrain.cpp: /Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/V
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QPoint \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qpoint.h \
 		../projet/heros.h \
-		../projet/echelle.h \
+		../projet/porte.h \
 		../projet/decor.h \
 		../projet/objet.h \
-		../projet/armoire.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QTimer \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qtimer.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QKeyEvent \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/qevent.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QMessageBox \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qmessagebox.h \
+		../projet/echelle.h \
+		../projet/armoire.h \
 		../projet/terrain.h
 	/Users/orlandopalermo/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/orlandopalermo/Qt/5.3/clang_64/mkspecs/macx-clang -I'/Users/orlandopalermo/Documents/School/Helha/3- Third Year/C++/Projet/Code Source/projetCpp/projet' -I/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Headers -I. -F/Users/orlandopalermo/Qt/5.3/clang_64/lib ../projet/terrain.h -o moc_terrain.cpp
 
@@ -622,16 +626,17 @@ main.o: ../projet/main.cpp ../projet/mainwindow.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QPoint \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qpoint.h \
 		../projet/heros.h \
-		../projet/echelle.h \
+		../projet/porte.h \
 		../projet/decor.h \
 		../projet/objet.h \
-		../projet/armoire.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QTimer \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qtimer.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QKeyEvent \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/qevent.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QMessageBox \
-		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qmessagebox.h
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qmessagebox.h \
+		../projet/echelle.h \
+		../projet/armoire.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../projet/main.cpp
 
 mainwindow.o: ../projet/mainwindow.cpp ../projet/mainwindow.h \
@@ -739,6 +744,19 @@ armoire.o: ../projet/armoire.cpp ../projet/armoire.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QPixmap \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/qpixmap.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o armoire.o ../projet/armoire.cpp
+
+porte.o: ../projet/porte.cpp ../projet/porte.h \
+		../projet/decor.h \
+		../projet/objet.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QWidget \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qwidget.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QLabel \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qlabel.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QPoint \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qpoint.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QPixmap \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/qpixmap.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o porte.o ../projet/porte.cpp
 
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp

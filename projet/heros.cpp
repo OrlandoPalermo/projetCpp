@@ -69,6 +69,10 @@ bool Heros::isVisible() const {
     return visible;
 }
 
+void Heros::setVisibleClasse(bool v) {
+    visible = v;
+}
+
 void Heros::setRepere()
 {
     repere = true;
@@ -86,9 +90,9 @@ void Heros::setAxeX()
 {
     this->axeX = !axeX;
 }
-void Heros::setAxeY()
+void Heros::setAxeY(bool axe)
 {
-    this->axeY = !axeY;
+    this->axeY = axe;
 }
 
 void Heros::remplacerSprite(int numPhoto)

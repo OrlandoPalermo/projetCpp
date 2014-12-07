@@ -7,7 +7,7 @@ Echelle::Echelle(string nom, QWidget* parent, int x, int y) : Decor(nom, parent,
     //insertion de l'image de l'objet ici
 
     this->setFixedWidth(45);
-    this->setFixedHeight(221);
+    this->setFixedHeight(139);
 }
 
 int Echelle::getLargeur()const
