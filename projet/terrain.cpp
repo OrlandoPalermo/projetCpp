@@ -1,7 +1,7 @@
 ﻿#include "terrain.h"
 #include <QApplication>
 #include <vector>
-
+#include <typeinfo>
 using namespace std;
 Terrain::Terrain() : QWidget()
 {
@@ -113,6 +113,9 @@ void Terrain::testColission()
         }
 
 
+
+
+
     }
 
 
@@ -127,15 +130,14 @@ void Terrain::testColission()
 
 void Terrain::keyPressEvent(QKeyEvent *event)
 {
-
+    //messageUtilisateur();
     switch(event->key())
     {
     case Qt::Key_Right :
 
-         heros->seDeplacer(1);break;
+         heros->seDeplacer(1);
 
-
-
+        break;
     case Qt::Key_Left :
         heros->seDeplacer(2);
 
@@ -145,14 +147,43 @@ void Terrain::keyPressEvent(QKeyEvent *event)
 
         break;
     case Qt::Key_Up :
-        if(heros->getX()>= (*decors)[1]->getX())
+        /*if(heros->getX()>= (*decors)[1]->getX())
         {
             heros->setAxeY();
-        }
+        }*/
         heros->seDeplacer(3);
 
-
         break;
+    }
+
+    if ( event->key() == Qt::Key_Right || event->key() == Qt::Key_Left)
+    {
+        //messageUtilisateur();
+        for ( int i = 0 ; i < decors->size() ; i++ )
+        {
+            if (
+               ( ( heros->getX() + heros->getL() ) < (*decors)[i]->getX() /*+ (sens * (*decors)[i]->getVision() )*/ ) || // si le heros se trouve tout à gauche de l'ennemis
+               (  heros->getX() > ( (*decors)[i]->getX() + (*decors)[i]->getLargeur() /*+ (sens * (*decors)[i]->getVision() )*/ ) ) //|| // si le heros se trouve tout à droite de l'ennemis
+               //( ( heros->getY() + heros->getH() ) < (*decors)[i]->getY() ) || // si le heros se trouve au-dessus de l'ennemis
+               //(  heros->getY() > ( (*decors)[i]->getY() + (*decors)[i]->getH() ) ) // si le heros se trouve en-dessous de l'ennemis
+               )
+            {
+
+            }
+            else
+            {
+                if ( (*decors)[i] == dynamic_cast<Echelle *>((*decors)[i]))
+                {
+                    // Tu peux remetre le QMessage afin de bien verifier la colission entre chaque type d'objet
+                    // ne pas oublier le changement axe x/y
+                    //QMessageBox::information ( this , "Ca marche ca touche " , "Il y a colission !");
+                }
+                else if ( (*decors)[i] == dynamic_cast<Armoire *>((*decors)[i]))
+                {
+                    //QMessageBox::information ( this , "Ca marche ca touche " , "Il y a colission !");
+                }
+            }
+        }
     }
 
 

@@ -30,9 +30,9 @@ HEADERS  += mainwindow.h \
     ennemi.h \
     majordhomme.h \
     terrain.h \
-    objet.h \
-    decor.h \
     echelle.h \
-    armoire.h
+    armoire.h \
+    objet.h \
+    decor.h
 
 FORMS    += mainwindow.ui

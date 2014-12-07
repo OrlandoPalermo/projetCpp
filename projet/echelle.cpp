@@ -10,4 +10,13 @@ Echelle::Echelle(string nom, QWidget* parent, int x, int y) : Decor(nom, parent,
     this->setFixedHeight(221);
 }
 
+int Echelle::getLargeur()const
+{
+    return this->width();
+}
+int Echelle::getHauteur()const
+{
+    return this->height();
+}
+
 void Echelle::abstract() {}

@@ -1,7 +1,7 @@
 #ifndef DECOR_H
 #define DECOR_H
 
-#include <objet.h>
+#include "objet.h"
 #include <QLabel>
 #include <QPoint>
 
@@ -16,6 +16,9 @@ public:
 
     int getX();
     int getY();
+
+    virtual int getLargeur()const = 0;
+    virtual int getHauteur()const = 0;
 
 };
 

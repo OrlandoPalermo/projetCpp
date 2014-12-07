@@ -7,12 +7,13 @@
 #include "vector"
 #include "majordhomme.h"
 #include "heros.h"
-#include "echelle.h"
-#include "armoire.h"
 #include <QTimer>
 #include <QKeyEvent>
 #include <QMessageBox>
-#include "decor.h"
+
+#include "echelle.h"
+#include "armoire.h"
+
 
 class Terrain : public QWidget
 {
