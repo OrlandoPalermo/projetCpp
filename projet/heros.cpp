@@ -86,13 +86,14 @@ bool Heros::isAxeY() const {
     return this->axeY;
 }
 
-void Heros::setAxeX()
+void Heros::setAxeX(bool axe)
 {
-    this->axeX = !axeX;
+    this->axeX = !axe;
 }
 void Heros::setAxeY(bool axe)
 {
     this->axeY = axe;
+    this->setAxeX(axe);
 }
 
 void Heros::remplacerSprite(int numPhoto)

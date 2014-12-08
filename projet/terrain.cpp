@@ -134,7 +134,10 @@ void Terrain::testColission()
 
 void Terrain::keyPressEvent(QKeyEvent *event)
 {
-    //messageUtilisateur();
+
+    int choix  = 0;
+
+
     switch(event->key())
     {
     case Qt::Key_E:
@@ -148,52 +151,117 @@ void Terrain::keyPressEvent(QKeyEvent *event)
             }
         }
         break;
+
+
     case Qt::Key_Right :
-         heros->seDeplacer(1);
+        choix = 1;
+        //heros->seDeplacer(1);
         break;
     case Qt::Key_Left :
-        heros->seDeplacer(2);
+        choix = 2;
+        //heros->seDeplacer(2);
         break;
     case Qt::Key_Down :
-        heros->seDeplacer(4);
+        choix = 4;
+        //heros->seDeplacer(4);
         break;
     case Qt::Key_Up :
-        /*if(heros->getX()>= (*decors)[1]->getX())
-        {
-            heros->setAxeY();
-        }*/
-        heros->seDeplacer(3);
+        choix = 3;
+        //heros->seDeplacer(3);
         break;
     }
 
-    if ( event->key() == Qt::Key_Right || event->key() == Qt::Key_Left)
+    if ( choix >= 1 && choix <= 4 )
     {
-        //messageUtilisateur();
-        for ( unsigned i = 0 ; i < decors->size() ; i++ )
+        if ( choix == 1 || choix == 2)
         {
-            if (
-               ( ( heros->getX() + heros->getL() ) < (*decors)[i]->getX() /*+ (sens * (*decors)[i]->getVision() )*/ ) || // si le heros se trouve tout à gauche de l'ennemis
-               (  heros->getX() > ( (*decors)[i]->getX() + (*decors)[i]->getLargeur() /*+ (sens * (*decors)[i]->getVision() )*/ ) ) //|| // si le heros se trouve tout à droite de l'ennemis
-               //( ( heros->getY() + heros->getH() ) < (*decors)[i]->getY() ) || // si le heros se trouve au-dessus de l'ennemis
-               //(  heros->getY() > ( (*decors)[i]->getY() + (*decors)[i]->getH() ) ) // si le heros se trouve en-dessous de l'ennemis
-               )
-            {
-                //Remise à zéro de tous les paramètres des comportements
-                heros->setAxeY(false);
-                heros->setVisible(true);
-                activeKeyE = false;
-            }
-            else
-            {
-                emit comportementDecor((*decors)[i]);
 
-                //On casse la boucle car on ne peut rentrer en collision qu'avec un seul décort à la fois
-                break;
-            }
+                for ( unsigned i = 0 ; i < decors->size() ; i++ )
+                        {
+
+                                if (
+                                    ( ( heros->getX() + heros->getL() ) < (*decors)[i]->getX() ) || // si le heros se trouve tout à gauche de l'objet
+                                    (  heros->getX() > ( (*decors)[i]->getX() + (*decors)[i]->getLargeur() ) ) || // si le heros se trouve tout à droite de l'objet
+                                    ( ( heros->getY() + heros->getH() ) < (*decors)[i]->getY() ) || // si le heros se trouve au-dessus de l'objet
+                                    (  heros->getY() > ( (*decors)[i]->getY() + (*decors)[i]->getHauteur() ) ) // si le heros se trouve en-dessous de l'objet
+                                    )
+                                {
+                                    //Remise à zéro de tous les paramètres des comportements
+                                    heros->setAxeY(false);
+                                    heros->setVisible(true);
+                                    activeKeyE = false;
+                                }
+                                else
+                                {
+                                    emit comportementDecor((*decors)[i]);
+
+                                    //On casse la boucle car on ne peut rentrer en collision qu'avec un seul décort à la fois
+                                    break;
+                                }
+
+                        }
+
+
         }
+        else if ( choix == 4 )
+        {
+            for ( unsigned i = 0 ; i < decors->size() ; i++ )
+                    {
+                        if (
+                           ( ( heros->getX() + heros->getL() ) < (*decors)[i]->getX() ) || // si le heros se trouve tout à gauche de l'objet
+                           (  heros->getX() > ( (*decors)[i]->getX() + (*decors)[i]->getLargeur() ) ) || // si le heros se trouve tout à droite de l'objet
+                           ( ( heros->getY() + heros->getH() ) < (*decors)[i]->getY() - 10 ) || // si le heros se trouve au-dessus de l'objet
+                           (  heros->getY() > ( (*decors)[i]->getY() + (*decors)[i]->getHauteur()  ) ) // si le heros se trouve en-dessous de l'objet
+                           )
+                        {
+                            //Remise à zéro de tous les paramètres des comportements
+                            heros->setAxeY(false);
+                            heros->setVisible(true);
+                            activeKeyE = false;
+                        }
+                        else
+                        {
+                            emit comportementDecor((*decors)[i]);
+
+                            //On casse la boucle car on ne peut rentrer en collision qu'avec un seul décort à la fois
+                            break;
+                        }
+                    }
+        }
+        else if ( choix == 3 )
+        {
+            for ( unsigned i = 0 ; i < decors->size() ; i++ )
+                    {
+                        if (
+                           ( ( heros->getX() + heros->getL() ) < (*decors)[i]->getX() ) || // si le heros se trouve tout à gauche de l'objet
+                           (  heros->getX() > ( (*decors)[i]->getX() + (*decors)[i]->getLargeur() ) ) || // si le heros se trouve tout à droite de l'objet
+                           ( ( heros->getY() + heros->getH() ) < (*decors)[i]->getY() ) || // si le heros se trouve au-dessus de l'objet
+                           (  heros->getY() > ( (*decors)[i]->getY() + (*decors)[i]->getHauteur() + 10 ) ) // si le heros se trouve en-dessous de l'objet
+                           )
+                        {
+                            //Remise à zéro de tous les paramètres des comportements
+                            heros->setAxeY(false);
+                            heros->setVisible(true);
+                            activeKeyE = false;
+                        }
+                        else
+                        {
+                            emit comportementDecor((*decors)[i]);
+
+                            //On casse la boucle car on ne peut rentrer en collision qu'avec un seul décort à la fois
+                            break;
+                        }
+                    }
+        }
+
+        //if ( choix >= 1 && choix <= 4 )
+            heros->seDeplacer(choix);
+
+
+
+
+
     }
-
-
 
 }
 
@@ -283,7 +351,7 @@ void Terrain::init(int numeroNiveau) {
         ennemis->push_back(new Majordhomme(2,this,870,540,53,73,10,false));
 
         decors->push_back(new Armoire("Armoire", this, 672, 530));
-        decors->push_back(new Echelle("Echelle", this, 772, 473));
+        decors->push_back(new Echelle("Echelle", this, 778, 453));//anciennement 772-473
         decors->push_back(new Porte("Porte", this, 870, 325));
 
         break;
@@ -308,4 +376,5 @@ void Terrain::niveauSuivant() {
 void Terrain::resetNiveau() {
     heros->setX(coordDepartHerosX);
     heros->setY(coordDepartHerosY);
+    heros->setAxeY(false);
 }

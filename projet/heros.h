@@ -27,7 +27,7 @@ public:
     bool isAxeX() const;
     bool isAxeY() const;
 
-    void setAxeX();
+    void setAxeX(bool);
     void setAxeY(bool);
 
     virtual void remplacerSprite(int);
