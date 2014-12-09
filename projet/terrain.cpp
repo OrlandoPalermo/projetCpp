@@ -154,60 +154,27 @@ void Terrain::keyPressEvent(QKeyEvent *event)
 
 
     case Qt::Key_Right :
-<<<<<<< HEAD
-        if(heros->getNumImage()>2)
-        {
-            heros->setNumImage(0);
-        }
-         heros->seDeplacer(1);
+    choix = 1;
+
         break;
     case Qt::Key_Left :
-        if(heros->getNumImage()<=2)
-        {
-            heros->setNumImage(3);
-            //heros->seDeplacer(2);
-        }
-        heros->seDeplacer(2);
+        choix = 2;
+
 
         break;
     case Qt::Key_Down :
-        if(heros->getNumImage()<=5)
-        {
-            heros->setNumImage(6);
-            //heros->seDeplacer(2);
-        }
-        heros->seDeplacer(4);
+        choix= 4;
+
         break;
     case Qt::Key_Up :
+        choix = 3;
         /*if(heros->getX()>= (*decors)[1]->getX())
         {
             heros->setAxeY();
         }*/
+        break;
 
-        if(heros->getNumImage()<=5)
-        {
-            heros->setNumImage(6);
-            //heros->seDeplacer(2);
-        }
 
-        heros->seDeplacer(3);
-=======
-        choix = 1;
-        //heros->seDeplacer(1);
-        break;
-    case Qt::Key_Left :
-        choix = 2;
-        //heros->seDeplacer(2);
-        break;
-    case Qt::Key_Down :
-        choix = 4;
-        //heros->seDeplacer(4);
-        break;
-    case Qt::Key_Up :
-        choix = 3;
-        //heros->seDeplacer(3);
->>>>>>> origin/master
-        break;
     }
 
     if ( choix >= 1 && choix <= 4 )

@@ -36,6 +36,10 @@ void Heros::seDeplacer(int direction) {
     case 1 : if ( this->isAxeX() == true )
         {
         Personnage::setX(Personnage::getX() + Personnage::getVitesseDeplacement()); // deplacement du heros à droite
+        if(this->getNumImage()>2)
+        {
+            this->setNumImage(0);
+        }
 
         this->animer();
         }
@@ -43,18 +47,33 @@ void Heros::seDeplacer(int direction) {
     case 2 : if ( this->isAxeX() == true )
         {
         Personnage::setX(Personnage::getX() - Personnage::getVitesseDeplacement()); // deplacement du heros à gauche
+        if(this->getNumImage()<=2)
+        {
+            this->setNumImage(3);
+            //heros->seDeplacer(2);
+        }
         this->animer();
         }
         break;
     case 3 : if ( this->isAxeY() == true )
         {
         Personnage::setY(Personnage::getY() - Personnage::getVitesseDeplacement()); // deplacement vers le haut
+        if(this->getNumImage()<=5)
+        {
+            this->setNumImage(6);
+            //heros->seDeplacer(2);
+        }
         this->animer();
         }
         break;
     case 4 : if ( this->isAxeY() == true )
         {
         Personnage::setY(Personnage::getY() + Personnage::getVitesseDeplacement()); // depalcement vers le bas
+        if(this->getNumImage()<=5)
+        {
+            this->setNumImage(6);
+            //heros->seDeplacer(2);
+        }
         this->animer();
         }
         break;
