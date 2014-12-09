@@ -149,12 +149,27 @@ void Terrain::keyPressEvent(QKeyEvent *event)
         }
         break;
     case Qt::Key_Right :
+        if(heros->getNumImage()>2)
+        {
+            heros->setNumImage(0);
+        }
          heros->seDeplacer(1);
         break;
     case Qt::Key_Left :
+        if(heros->getNumImage()<=2)
+        {
+            heros->setNumImage(3);
+            //heros->seDeplacer(2);
+        }
         heros->seDeplacer(2);
+
         break;
     case Qt::Key_Down :
+        if(heros->getNumImage()<=5)
+        {
+            heros->setNumImage(6);
+            //heros->seDeplacer(2);
+        }
         heros->seDeplacer(4);
         break;
     case Qt::Key_Up :
@@ -162,6 +177,13 @@ void Terrain::keyPressEvent(QKeyEvent *event)
         {
             heros->setAxeY();
         }*/
+
+        if(heros->getNumImage()<=5)
+        {
+            heros->setNumImage(6);
+            //heros->seDeplacer(2);
+        }
+
         heros->seDeplacer(3);
         break;
     }
@@ -240,15 +262,35 @@ void Terrain::ajouterEnnemisRepere(Ennemi* e)
 void Terrain::keyReleaseEvent(QKeyEvent *event)
 {
     //Utilisation de event->ignore() pour éviter que les sprites ne se bloquent si l'utilisateur reste appuyé
+   /* if(heros->getNumImage()>2 && event->key()==Qt::Key_Right)
+    {
+        heros->setNumImage(0);
+    }
+    if(heros->getNumImage()<=2 && event->key()==Qt::Key_Left)
+    {
+        heros->setNumImage(3);
+    }*/
     if(event->isAutoRepeat())
     {
+
         event->ignore();
     }
 
     //Si l'utilisateur relâche le KeyEvent pour de bon alors Mario revient à son sprite statique de départ
+
     else
     {
-      heros->spriteReset();
+
+           if(event->key()==Qt::Key_Left)
+           {
+             heros->setNumImage(3);
+             heros->remplacerSprite(heros->getNumImage());
+           }
+
+           else
+           {
+           heros->spriteReset();
+           }
     }
 
           //heros->spriteReset();
@@ -279,8 +321,8 @@ void Terrain::init(int numeroNiveau) {
 
         labFond->setPixmap(QPixmap("Terrain_1Ref.png"));
 
-        ennemis->push_back(new Majordhomme(2,this,700,375,53,73,10,false));
-        ennemis->push_back(new Majordhomme(2,this,870,540,53,73,10,false));
+        ennemis->push_back(new Majordhomme(2,this,700,400,51,50,10,false));
+        ennemis->push_back(new Majordhomme(2,this,870,565,51,50,10,false));
 
         decors->push_back(new Armoire("Armoire", this, 672, 530));
         decors->push_back(new Echelle("Echelle", this, 772, 473));

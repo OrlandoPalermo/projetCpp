@@ -13,6 +13,7 @@ public:
     Majordhomme(int,  QWidget*, int=0, int=0,int=0,int=0,int=50,bool=false);
     void seDeplacer(int);
     virtual void remplacerSprite(int);
+    void animer();
 };
 
 #endif // MAJORDHOMME_H

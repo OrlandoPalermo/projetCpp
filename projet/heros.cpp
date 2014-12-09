@@ -36,22 +36,26 @@ void Heros::seDeplacer(int direction) {
     case 1 : if ( this->isAxeX() == true )
         {
         Personnage::setX(Personnage::getX() + Personnage::getVitesseDeplacement()); // deplacement du heros à droite
+
         this->animer();
         }
         break;
     case 2 : if ( this->isAxeX() == true )
         {
         Personnage::setX(Personnage::getX() - Personnage::getVitesseDeplacement()); // deplacement du heros à gauche
+        this->animer();
         }
         break;
     case 3 : if ( this->isAxeY() == true )
         {
         Personnage::setY(Personnage::getY() - Personnage::getVitesseDeplacement()); // deplacement vers le haut
+        this->animer();
         }
         break;
     case 4 : if ( this->isAxeY() == true )
         {
         Personnage::setY(Personnage::getY() + Personnage::getVitesseDeplacement()); // depalcement vers le bas
+        this->animer();
         }
         break;
     }
@@ -99,8 +103,15 @@ void Heros::remplacerSprite(int numPhoto)
 {
     switch(numPhoto)
     {
+        case 0 : this->setPixmap(*(new QPixmap("Marios/mario_inactif.png"))); break;
         case 1 : this->setPixmap(*(new QPixmap("Marios/mario_droite.png"))); break;
         case 2 : this->setPixmap(*(new QPixmap("Marios/mario_gauche.png"))); break;
+        case 3 : this->setPixmap(*(new QPixmap("Marios/mario_inactifRevert.png"))); break;
+        case 4 : this->setPixmap(*(new QPixmap("Marios/mario_gaucheRevert.png"))); break;
+        case 5 : this->setPixmap(*(new QPixmap("Marios/mario_droiteRevert.png"))); break;
+        case 6 : this->setPixmap(*(new QPixmap("Marios/mario_dosGauche.png"))); break;
+        case 7 : this->setPixmap(*(new QPixmap("Marios/mario_dosDroite.png"))); break;
+
     }
 }
 
@@ -116,11 +127,43 @@ void Heros::animer()
         this->setNumImage(2);
         this->remplacerSprite(this->getNumImage());
     }
-    else
+    else if(this->getNumImage()==2)
     {
         this->setNumImage(1);
         this->remplacerSprite(this->getNumImage());
     }
+    else if(this->getNumImage()==3)
+    {
+        this->setNumImage(4);
+        this->remplacerSprite(this->getNumImage());
+    }
+    else if(this->getNumImage()==4)
+    {
+        this->setNumImage(5);
+        this->remplacerSprite(this->getNumImage());
+    }
+    else if(this->getNumImage()==5)
+    {
+        this->setNumImage(4);
+        this->remplacerSprite(this->getNumImage());
+    }
+    else if(this->getNumImage()==6)
+    {
+        this->setNumImage(7);
+        this->remplacerSprite(this->getNumImage());
+    }
+    else if(this->getNumImage()==6)
+    {
+        this->setNumImage(7);
+        this->remplacerSprite(this->getNumImage());
+    }
+    else if(this->getNumImage()==7)
+    {
+        this->setNumImage(6);
+        this->remplacerSprite(this->getNumImage());
+    }
+
+
 
 }
 
