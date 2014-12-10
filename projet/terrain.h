@@ -8,6 +8,7 @@
 #include "majordhomme.h"
 #include "heros.h"
 #include "porte.h"
+#include "torche.h"
 #include <QTimer>
 #include <QKeyEvent>
 #include <QMessageBox>
