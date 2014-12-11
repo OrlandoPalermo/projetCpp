@@ -7,6 +7,7 @@ Torche::Torche(string nom, QWidget* parent, int x, int y) : Decor(nom, parent, x
     timer = new QTimer(parent);
     timer->setInterval(120);
     numeroImage = 1;
+    setFixedSize(55,92);
     setPixmap(QPixmap("Torches/Torche_1.png"));
     QObject::connect(timer, SIGNAL(timeout()), this, SLOT(changerImage()));
     timer->start();

@@ -29,3 +29,12 @@ int Decor::getY()
 {
     return coordonnees->y();
 }
+
+void Decor::setHeight(int haut)
+{
+    setFixedHeight(haut);
+}
+void Decor::setWidth(int larg)
+{
+    setFixedWidth(larg);
+}

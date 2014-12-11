@@ -49,6 +49,7 @@ public:
     void ajouterEnnemisRepere(Ennemi *);
     void init(int=0);
     void niveauSuivant();
+    void rafraichirStage(int);
     //void retirerEnnemisRepere();
 
 signals:

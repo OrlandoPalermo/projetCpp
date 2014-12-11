@@ -16,6 +16,8 @@ public:
 
     int getX();
     int getY();
+    void setHeight(int);
+    void setWidth(int);
 
     virtual int getLargeur()const = 0;
     virtual int getHauteur()const = 0;
