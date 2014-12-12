@@ -3,6 +3,7 @@
 #include <vector>
 #include <typeinfo>
 #include <sstream>
+#include "mur.h"
 
 using namespace std;
 
@@ -138,10 +139,22 @@ void Terrain::keyPressEvent(QKeyEvent *event)
 {
 
     int choix  = 0;
-
+    bool retourPageAccueil = false;
 
     switch(event->key())
     {
+    case Qt::Key_Escape:
+        bloquerLeJeux();
+        retourPageAccueil = miseEnPause();
+        if ( retourPageAccueil )
+        {
+            retournerPageAccueil();
+        }
+        else
+        {
+            debloquerLeJeux();
+        }
+        break;
     case Qt::Key_E:
         if (activeKeyE) {
             if (heros->isVisible()) {
@@ -187,6 +200,9 @@ void Terrain::keyPressEvent(QKeyEvent *event)
                 for ( unsigned i = 0 ; i < decors->size() ; i++ )
                         {
 
+                            if ((*decors)[i] != dynamic_cast<Mur*>((*decors)[i]))
+                            {
+
                                 if (
                                     ( ( heros->getX() + heros->getL() ) < (*decors)[i]->getX() ) || // si le heros se trouve tout à gauche de l'objet
                                     (  heros->getX() > ( (*decors)[i]->getX() + (*decors)[i]->getLargeur() ) ) || // si le heros se trouve tout à droite de l'objet
@@ -206,6 +222,64 @@ void Terrain::keyPressEvent(QKeyEvent *event)
                                     //On casse la boucle car on ne peut rentrer en collision qu'avec un seul décort à la fois
                                     break;
                                 }
+
+                            }
+                             else
+                            {
+
+
+                                if ( choix == 1)
+                                {
+
+                                if (
+                                    ( ( heros->getX() + heros->getL() ) < (*decors)[i]->getX() - 6 ) || // si le heros se trouve tout à gauche de l'objet
+                                    (  heros->getX() > ( (*decors)[i]->getX() + (*decors)[i]->getLargeur() ) ) || // si le heros se trouve tout à droite de l'objet
+                                    ( ( heros->getY() + heros->getH() ) < (*decors)[i]->getY() ) || // si le heros se trouve au-dessus de l'objet
+                                    (  heros->getY() > ( (*decors)[i]->getY() + (*decors)[i]->getHauteur() ) ) // si le heros se trouve en-dessous de l'objet
+                                    )
+                                {
+                                    //Remise à zéro de tous les paramètres des comportements
+                                    heros->setAxeY(false);
+                                    heros->setVisible(true);
+                                    activeKeyE = false;
+                                }
+                                else
+                                {
+                                    //emit comportementDecor((*decors)[i]);
+                                    choix = 0;
+                                    //On casse la boucle car on ne peut rentrer en collision qu'avec un seul décort à la fois
+                                    break;
+                                }
+
+                                }
+                                else if ( choix == 2)
+                                {
+
+                                    if (
+                                        ( ( heros->getX() + heros->getL() ) < (*decors)[i]->getX() ) || // si le heros se trouve tout à gauche de l'objet
+                                        (  heros->getX() > ( (*decors)[i]->getX() + (*decors)[i]->getLargeur() + 6 ) ) || // si le heros se trouve tout à droite de l'objet
+                                        ( ( heros->getY() + heros->getH() ) < (*decors)[i]->getY() ) || // si le heros se trouve au-dessus de l'objet
+                                        (  heros->getY() > ( (*decors)[i]->getY() + (*decors)[i]->getHauteur() ) ) // si le heros se trouve en-dessous de l'objet
+                                        )
+                                    {
+                                        //Remise à zéro de tous les paramètres des comportements
+                                        heros->setAxeY(false);
+                                        heros->setVisible(true);
+                                        activeKeyE = false;
+                                    }
+                                    else
+                                    {
+                                        //emit comportementDecor((*decors)[i]);
+                                        choix = 0;
+                                        //On casse la boucle car on ne peut rentrer en collision qu'avec un seul décort à la fois
+                                        break;
+                                    }
+
+                                }
+
+
+                            }
+
 
                         }
 
@@ -262,7 +336,7 @@ void Terrain::keyPressEvent(QKeyEvent *event)
                     }
         }
 
-        //if ( choix >= 1 && choix <= 4 )
+        if ( choix >= 1 && choix <= 4 )
             heros->seDeplacer(choix);
 
 
@@ -466,11 +540,72 @@ void Terrain::rafraichirStage(int numStage)
         decors->push_back(new Torche("Torche", this, 45, 125));
         (*decors)[11]->setVisible(true);
 
+        decors->push_back(new Mur("Mur",this,450,425,80,100));
+        (*decors)[12]->setVisible(true);
+
         break;
 
 
 
 
     }
+}
+
+bool Terrain::miseEnPause()
+{
+    int reponseJoueur = QMessageBox::question(this, "Pause", "Voulez-vous quitter le jeu  ?", QMessageBox::Yes | QMessageBox::No);
+
+    if ( reponseJoueur == QMessageBox::Yes )
+    {
+        reponseJoueur = true;
+    }
+    else
+    {
+        reponseJoueur = false;
+    }
+
+    return reponseJoueur;
+
+}
+
+void Terrain::bloquerLeJeux()
+{
+    // bloque tous les timers ( car thread différent donc obligation pour la pause )
+    timer->blockSignals(true);
+    timer->stop();
+    //tempsTimer1 = timer->interval();
+    //timer->blockSignals(true);
+    sensTimerRonde->blockSignals(true);
+    sensTimerRonde->stop();
+    //tempsTimer2 = sensTimerRonde->interval();
+    //sensTimerRonde->blockSignals(true);
+    dureeSensDeplacement->blockSignals(true);
+    dureeSensDeplacement->stop();
+    //tempsTimer3 = dureeSensDeplacement->interval();
+    //dureeSensDeplacement->blockSignals(true);
+
+}
+
+void Terrain::debloquerLeJeux()
+{
+    // debloque tous les timers
+    timer->blockSignals(false);
+    timer->start();
+    //timer->start(50-tempsTimer1);
+    //timer->blockSignals(false);
+    sensTimerRonde->blockSignals(false);
+    sensTimerRonde->start();
+    //sensTimerRonde->start(5000-tempsTimer2);
+    //sensTimerRonde->blockSignals(false);
+    dureeSensDeplacement->blockSignals(false);
+    dureeSensDeplacement->start();
+    //dureeSensDeplacement->start(50-tempsTimer3);
+    //dureeSensDeplacement->blockSignals(false);
+}
+
+void Terrain::retournerPageAccueil()
+{
+    this->close();
+
 }
 
