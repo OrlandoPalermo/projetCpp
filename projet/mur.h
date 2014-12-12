@@ -8,6 +8,7 @@ class Mur : public Decor
 private:
     int largeur;
     int hauteur;
+    virtual void abstract();
 public:
     Mur(std::string, QWidget *, int, int, int, int);
     void setHauteur(int);

@@ -10,7 +10,7 @@ private:
 
 public:
     //Vision de 50 pixel par défaut
-    Majordhomme(int,  QWidget*, int=0, int=0,int=0,int=0,int=50,bool=false);
+    Majordhomme(int,  QWidget*, int=0, int=0,int=0,int=0,int=50,bool=false,int=0,int=0);
     void seDeplacer(int);
     virtual void remplacerSprite(int);
     void animer();

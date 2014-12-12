@@ -3,6 +3,7 @@
 #include <vector>
 #include <typeinfo>
 #include <sstream>
+#include "mur.h"
 
 using namespace std;
 
@@ -31,7 +32,7 @@ Terrain::Terrain() : QWidget()
     timer->setInterval(50); // permet de gérer l'intervalle entre chaque répétitions
 
     sensTimerRonde = new QTimer(this); // timer pour le changement de direction des ennemis
-    sensTimerRonde->setInterval(5000);
+    sensTimerRonde->setInterval(500);
 
     dureeSensDeplacement = new QTimer(this); //  timer pour la ronde des ennemis
     dureeSensDeplacement->setInterval(50);
@@ -138,10 +139,22 @@ void Terrain::keyPressEvent(QKeyEvent *event)
 {
 
     int choix  = 0;
-
+    bool retourPageAccueil = false;
 
     switch(event->key())
     {
+    case Qt::Key_Escape:
+        bloquerLeJeux();
+        retourPageAccueil = miseEnPause();
+        if ( retourPageAccueil )
+        {
+            retournerPageAccueil();
+        }
+        else
+        {
+            debloquerLeJeux();
+        }
+        break;
     case Qt::Key_E:
         if (activeKeyE) {
             if (heros->isVisible()) {
@@ -187,6 +200,9 @@ void Terrain::keyPressEvent(QKeyEvent *event)
                 for ( unsigned i = 0 ; i < decors->size() ; i++ )
                         {
 
+                            if ((*decors)[i] != dynamic_cast<Mur*>((*decors)[i]))
+                            {
+
                                 if (
                                     ( ( heros->getX() + heros->getL() ) < (*decors)[i]->getX() ) || // si le heros se trouve tout à gauche de l'objet
                                     (  heros->getX() > ( (*decors)[i]->getX() + (*decors)[i]->getLargeur() ) ) || // si le heros se trouve tout à droite de l'objet
@@ -206,6 +222,64 @@ void Terrain::keyPressEvent(QKeyEvent *event)
                                     //On casse la boucle car on ne peut rentrer en collision qu'avec un seul décort à la fois
                                     break;
                                 }
+
+                            }
+                             else
+                            {
+
+
+                                if ( choix == 1)
+                                {
+
+                                if (
+                                    ( ( heros->getX() + heros->getL() ) < (*decors)[i]->getX() - 6 ) || // si le heros se trouve tout à gauche de l'objet
+                                    (  heros->getX() > ( (*decors)[i]->getX() + (*decors)[i]->getLargeur() ) ) || // si le heros se trouve tout à droite de l'objet
+                                    ( ( heros->getY() + heros->getH() ) < (*decors)[i]->getY() ) || // si le heros se trouve au-dessus de l'objet
+                                    (  heros->getY() > ( (*decors)[i]->getY() + (*decors)[i]->getHauteur() ) ) // si le heros se trouve en-dessous de l'objet
+                                    )
+                                {
+                                    //Remise à zéro de tous les paramètres des comportements
+                                    heros->setAxeY(false);
+                                    heros->setVisible(true);
+                                    activeKeyE = false;
+                                }
+                                else
+                                {
+                                    //emit comportementDecor((*decors)[i]);
+                                    choix = 0;
+                                    //On casse la boucle car on ne peut rentrer en collision qu'avec un seul décort à la fois
+                                    break;
+                                }
+
+                                }
+                                else if ( choix == 2)
+                                {
+
+                                    if (
+                                        ( ( heros->getX() + heros->getL() ) < (*decors)[i]->getX() ) || // si le heros se trouve tout à gauche de l'objet
+                                        (  heros->getX() > ( (*decors)[i]->getX() + (*decors)[i]->getLargeur() + 6 ) ) || // si le heros se trouve tout à droite de l'objet
+                                        ( ( heros->getY() + heros->getH() ) < (*decors)[i]->getY() ) || // si le heros se trouve au-dessus de l'objet
+                                        (  heros->getY() > ( (*decors)[i]->getY() + (*decors)[i]->getHauteur() ) ) // si le heros se trouve en-dessous de l'objet
+                                        )
+                                    {
+                                        //Remise à zéro de tous les paramètres des comportements
+                                        heros->setAxeY(false);
+                                        heros->setVisible(true);
+                                        activeKeyE = false;
+                                    }
+                                    else
+                                    {
+                                        //emit comportementDecor((*decors)[i]);
+                                        choix = 0;
+                                        //On casse la boucle car on ne peut rentrer en collision qu'avec un seul décort à la fois
+                                        break;
+                                    }
+
+                                }
+
+
+                            }
+
 
                         }
 
@@ -262,7 +336,7 @@ void Terrain::keyPressEvent(QKeyEvent *event)
                     }
         }
 
-        //if ( choix >= 1 && choix <= 4 )
+        if ( choix >= 1 && choix <= 4 )
             heros->seDeplacer(choix);
 
 
@@ -282,7 +356,41 @@ void Terrain::changeSensDeplacementEnnemis()
 {
     for (unsigned i = 0 ; i < ennemis->size() ; i++ )
     {
-        (*ennemis)[i]->Ennemi::setOrientationVision(); // change le sens de la ronde ennemis
+        /*if ( (*ennemis)[i]->Ennemi::isOrientationVision() == false )
+        {
+            if ( (*ennemis)[i]->Ennemi::getPosXMin() > (*ennemis)[i]->Ennemi::getX() - (*ennemis)[i]->Ennemi::getVitesseDeplacement() - 100  )
+            {
+                (*ennemis)[i]->Ennemi::setOrientationVision(true); // change le sens de la ronde ennemis
+            }
+
+        }
+        else
+        {
+            if ( (*ennemis)[i]->Ennemi::getPosXMax() < (*ennemis)[i]->Ennemi::getX() + (*ennemis)[i]->Ennemi::getL() + (*ennemis)[i]->Ennemi::getVitesseDeplacement() + 100  )
+            {
+                (*ennemis)[i]->Ennemi::setOrientationVision(false); // change le sens de la ronde ennemis
+            }
+
+        }*/
+
+        if ( (*ennemis)[i]->Ennemi::isOrientationVision() == false )
+        {
+            if ( (*ennemis)[i]->Ennemi::getPosXMin() > (*ennemis)[i]->Ennemi::getX() )
+            {
+                (*ennemis)[i]->Ennemi::setOrientationVision(true);
+            }
+        }
+        else
+        {
+            if ( (*ennemis)[i]->Ennemi::getPosXMax() < (*ennemis)[i]->Ennemi::getX() + (*ennemis)[i]->Ennemi::getL() )
+            {
+                (*ennemis)[i]->Ennemi::setOrientationVision(false);
+            }
+        }
+
+
+        //(*ennemis)[i]->Ennemi::setOrientationVision(); => a garder
+
     }
 }
 
@@ -376,8 +484,8 @@ void Terrain::init(int numeroNiveau) {
 
         labFond->setPixmap(QPixmap("Terrain_1Ref.png"));
 
-        ennemis->push_back(new Majordhomme(2,this,700,400,51,50,10,false));
-        ennemis->push_back(new Majordhomme(2,this,870,565,51,50,10,false));
+        ennemis->push_back(new Majordhomme(2,this,700,400,51,50,10,false,610,750));
+        ennemis->push_back(new Majordhomme(2,this,870,565,51,50,10,false,770,920));
 
 
         decors->push_back(new Armoire("Armoire", this, 672, 530));
@@ -418,10 +526,17 @@ void Terrain::rafraichirStage(int numStage)
         (*ennemis)[0]->setX(650);  (*ennemis)[0]->setY(415); //Placement de l'ennemi bas gauche
         (*ennemis)[1]->setX(900);  (*ennemis)[1]->setY(635); //Placement de l'ennemi bas droite
 
-        ennemis->push_back(new Majordhomme(2,this,220,635,51,50,10,false)); // Création d'un nouvel ennemi ajouté sur la map
+        (*ennemis)[0]->setPosXMin(650);  (*ennemis)[0]->setPosXMax(750); // modifie les rondes
+        (*ennemis)[1]->setPosXMin(800);  (*ennemis)[1]->setPosXMax(920); // modifie les rondes
+
+
+        ennemis->push_back(new Majordhomme(2,this,220,635,51,50,10,false,120,270)); // Création d'un nouvel ennemi ajouté sur la map
         (*ennemis)[2]->setVisible(true);
-        ennemis->push_back(new Majordhomme(2,this,653,170,51,50,10,false));// Création d'un nouvel ennemi ajouté sur la map
+        ennemis->push_back(new Majordhomme(2,this,653,170,51,50,10,false,580,680));// Création d'un nouvel ennemi ajouté sur la map
         (*ennemis)[3]->setVisible(true);
+
+        //(*ennemis)[2] -> modifier ses rondes
+        //(*ennemis)[3] -> modifier ses rondes
 
         //Nettoyage des vecteurs contenant les décors
         for (unsigned i(0); i < decors->size(); i++)
@@ -466,11 +581,60 @@ void Terrain::rafraichirStage(int numStage)
         decors->push_back(new Torche("Torche", this, 45, 125));
         (*decors)[11]->setVisible(true);
 
+        decors->push_back(new Mur("Mur",this,450,425,80,100));
+        (*decors)[12]->setVisible(true);
+
         break;
 
 
 
 
     }
+}
+
+bool Terrain::miseEnPause()
+{
+    int reponseJoueur = QMessageBox::question(this, "Pause", "Voulez-vous quitter le jeu  ?", QMessageBox::Yes | QMessageBox::No);
+
+    if ( reponseJoueur == QMessageBox::Yes )
+    {
+        reponseJoueur = true;
+    }
+    else
+    {
+        reponseJoueur = false;
+    }
+
+    return reponseJoueur;
+
+}
+
+void Terrain::bloquerLeJeux()
+{
+    // bloque tous les timers ( car thread différent donc obligation pour la pause )
+    timer->blockSignals(true);
+    //temps1 = timer->interval();
+    //timer->Enabled = false;
+    sensTimerRonde->blockSignals(true);
+    //sensTimerRonde->Enabled = false;
+    dureeSensDeplacement->blockSignals(true);
+    //dureeSensDeplacement->Enabled = false;
+}
+
+void Terrain::debloquerLeJeux()
+{
+    // debloque tous les timers
+    timer->blockSignals(false);
+    //timer->Enabled = true;
+    sensTimerRonde->blockSignals(false);
+    //sensTimerRonde->Enabled = true;
+    dureeSensDeplacement->blockSignals(false);
+    //dureeSensDeplacement->Enabled = true;
+}
+
+void Terrain::retournerPageAccueil()
+{
+    this->close();
+
 }
 

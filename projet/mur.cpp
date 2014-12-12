@@ -29,3 +29,5 @@ int Mur::getHauteur() const {
 int Mur::getLargeur() const {
     return largeur;
 }
+
+void Mur::abstract() {}

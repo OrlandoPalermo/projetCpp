@@ -1,9 +1,12 @@
 #include "ennemi.h"
 
-Ennemi::Ennemi(int vitesse, QWidget* parent, int x, int y, int l, int h, int vision, bool orientationVision) : Personnage(vitesse, parent, x, y, l, h)
+Ennemi::Ennemi(int vitesse, QWidget* parent, int x, int y, int l, int h, int vision, bool orientationVision,int posXMin,int posXMax) : Personnage(vitesse, parent, x, y, l, h)
 {
     setVision(vision);
     this->orientationVision = orientationVision;
+
+    this->posXMin = posXMin;
+    this->posXMax = posXMax;
 }
 
 Ennemi::~Ennemi() {}
@@ -28,11 +31,34 @@ int Ennemi::getVision() const {
     return vision;
 }
 
-void Ennemi::setOrientationVision()
+/*void Ennemi::setOrientationVision()
 {
     this->orientationVision = !orientationVision;
+}*/
+void Ennemi::setOrientationVision(bool v)
+{
+    this->orientationVision = v;
 }
+
 bool Ennemi::isOrientationVision()const
 {
     return this->orientationVision;
+}
+
+int Ennemi::getPosXMin()const
+{
+    return posXMin;
+}
+int Ennemi::getPosXMax()const
+{
+    return posXMax;
+}
+void Ennemi::setPosXMin(int p)
+{
+    posXMin = p;
+}
+
+void Ennemi::setPosXMax(int p)
+{
+    posXMax = p;
 }

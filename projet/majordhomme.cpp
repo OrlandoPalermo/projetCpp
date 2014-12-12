@@ -1,6 +1,6 @@
 #include "majordhomme.h"
 #include<QThread>
-Majordhomme::Majordhomme(int vitesse, QWidget* parent, int x, int y, int l, int h, int vision, bool orientationVision) : Ennemi(vitesse, parent, x, y, l, h, vision, orientationVision)
+Majordhomme::Majordhomme(int vitesse, QWidget* parent, int x, int y, int l, int h, int vision, bool orientationVision,int posXMin,int posXMax) : Ennemi(vitesse, parent, x, y, l, h, vision, orientationVision,posXMin,posXMax)
 {
     //insertion de l'image du majordhomme ici
     setPixmap(QPixmap("Majors/major_1.png"));

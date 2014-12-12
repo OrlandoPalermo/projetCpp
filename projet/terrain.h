@@ -37,6 +37,12 @@ private:
     int coordDepartHerosY;
 
     int niveauEnCours;
+
+
+    int temps1;
+    int temps2;
+    int temps3;
+
 public:
     Terrain();
     ~Terrain();
@@ -51,6 +57,10 @@ public:
     void niveauSuivant();
     void rafraichirStage(int);
     //void retirerEnnemisRepere();
+    bool miseEnPause();
+    void bloquerLeJeux();
+    void debloquerLeJeux();
+    void retournerPageAccueil();
 
 signals:
     void comportementDecor(Decor*);
