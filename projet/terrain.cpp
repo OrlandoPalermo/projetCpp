@@ -4,6 +4,7 @@
 #include <typeinfo>
 #include <sstream>
 #include "mur.h"
+#include "menu.h"
 
 using namespace std;
 
@@ -14,6 +15,9 @@ Terrain::Terrain() : QWidget()
     this->setUpdatesEnabled(true);
     labFond = new QLabel(this); //QLabel représentant le contenur de l'image de fond du stage
     this->setFixedSize(960,720);
+    this->setWindowTitle("Infiltrate Love");
+    //this->setWindowIcon(QIcon("D:/Users/Alexandre/Pictures/iconJeu.png"));
+
 
     heros = new Heros(5,this,200,575,23,42,true,false,false,true);
 
@@ -635,6 +639,7 @@ void Terrain::debloquerLeJeux()
 void Terrain::retournerPageAccueil()
 {
     this->close();
+    Menu::getMenu()->show();
 
 }
 
