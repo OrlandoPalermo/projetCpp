@@ -25,7 +25,11 @@ SOURCES += main.cpp\
     armoire.cpp \
     porte.cpp \
     mur.cpp \
-    torche.cpp
+    torche.cpp \
+    credit.cpp \
+    rules.cpp \
+    menu.cpp \
+    history.cpp
 
 HEADERS  += mainwindow.h \
     personnage.h \
@@ -39,6 +43,10 @@ HEADERS  += mainwindow.h \
     decor.h \
     porte.h \
     mur.h \
-    torche.h
+    torche.h \
+    credit.h \
+    rules.h \
+    menu.h \
+    history.h
 
 FORMS    += mainwindow.ui
