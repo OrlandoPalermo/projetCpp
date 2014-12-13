@@ -11,9 +11,12 @@ Ennemi::Ennemi(int vitesse, QWidget* parent, int x, int y, int l, int h, int vis
 
 Ennemi::~Ennemi() {}
 
-/*Ennemi::Ennemi(const Ennemi &e) : Personnage(e) {
-    vision = e.vision;
-}*/
+Ennemi::Ennemi(const Ennemi &e) : Personnage(e) {
+    vision = e.isVisible();
+    orientationVision = e.isOrientationVision();
+    posXMin = e.getPosXMin();
+    posXMax = e.getPosXMax();
+}
 
 /*Ennemi& Ennemi::operator=(const Ennemi& e) {
     if (&e != this) {
@@ -31,10 +34,6 @@ int Ennemi::getVision() const {
     return vision;
 }
 
-/*void Ennemi::setOrientationVision()
-{
-    this->orientationVision = !orientationVision;
-}*/
 void Ennemi::setOrientationVision(bool v)
 {
     this->orientationVision = v;

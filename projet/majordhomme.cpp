@@ -5,8 +5,13 @@ Majordhomme::Majordhomme(int vitesse, QWidget* parent, int x, int y, int l, int 
     //insertion de l'image du majordhomme ici
     setPixmap(QPixmap("Majors/major_1.png"));
     this->setFixedSize(l,h);
-    //this->pixmap()->scaled(QSize(l+300,h),Qt::IgnoreAspectRatio,Qt::FastTransformation);
-   // this->setStyleSheet("QLabel {background-color:blue;}");
+
+    this->setNumImage(0);
+}
+Majordhomme::Majordhomme(const Majordhomme &m):Ennemi(m)
+{
+    setPixmap(QPixmap("Majors/major_1.png"));
+    this->setFixedSize(m.Ennemi::getL(),m.Ennemi::getH());
     this->setNumImage(0);
 }
 
@@ -14,6 +19,12 @@ void Majordhomme::seDeplacer(int direction) {
     switch(direction)
     {
     case 1 :
+        if ( this->Ennemi::getPosXMax() < this->Ennemi::getX() + this->Ennemi::getL() )
+        {
+            this->Ennemi::setOrientationVision(false);
+        }
+        else
+        {
         Personnage::setX(Personnage::getX() + Personnage::getVitesseDeplacement()); // deplacement du heros à droite
         if(this->getNumImage()==15 || this->getNumImage()<=7)
             /*Si le sprite atteind le chiffre 15 pendant la ronde et que le timer de ronde n'est pas finie alors
@@ -24,10 +35,15 @@ void Majordhomme::seDeplacer(int direction) {
             this->setNumImage(8);
         }
         this->animer();
-
+        }
         break;
     case 2 :
-
+        if ( this->Ennemi::getPosXMin() > this->Ennemi::getX() )
+        {
+            this->Ennemi::setOrientationVision(true);
+        }
+        else
+        {
         Personnage::setX(Personnage::getX() - Personnage::getVitesseDeplacement()); // deplacement du heros à gauche
         if(this->getNumImage()>=8 || this->getNumImage()==7)
             /*Si le sprite atteind le chiffre 7 pendant la ronde et que le timer de ronde n'est pas finie alors
@@ -37,6 +53,7 @@ void Majordhomme::seDeplacer(int direction) {
              this->setNumImage(0);
          }
         this->animer();
+        }
         break;
     }
 }

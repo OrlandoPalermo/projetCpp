@@ -27,7 +27,6 @@ private:
     std::vector<Decor*>* decors;
 
     QTimer* timer;
-    QTimer* sensTimerRonde;
     QTimer* dureeSensDeplacement;
     QTimer *animation;
     QPixmap *fond;
@@ -39,17 +38,12 @@ private:
     int niveauEnCours;
 
 
-    int temps1;
-    int temps2;
-    int temps3;
-
 public:
     Terrain();
     ~Terrain();
 
     virtual void keyPressEvent(QKeyEvent *);
     virtual void keyReleaseEvent(QKeyEvent *);
-    //virtual void keyReleaseEvent(QKeyEvent *);
     void messageUtilisateur();
 
     void ajouterEnnemisRepere(Ennemi *);
@@ -68,8 +62,7 @@ signals:
 
 
 public slots:
-    void testColission();
-    void changeSensDeplacementEnnemis();
+    void testCollision();
     void deplacementEnnemis();
     void comportementDecorAction(Decor*);
     void resetNiveau();

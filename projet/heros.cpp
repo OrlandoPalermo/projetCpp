@@ -12,10 +12,14 @@ Heros::Heros(int vitesse, QWidget* parent, int x, int y, int l, int h, bool axeX
     setPixmap(QPixmap("Marios/mario_inactif.png"));
 }
 
-/*Heros::Heros(const Heros &h) : Personnage(h) {
-    visible = h.visible;
-    repere  = h.repere;
-}*/
+Heros::Heros(const Heros &h) : Personnage(h) {
+    axeX = h.isAxeX();
+    axeY = h.isAxeY();
+    visible = h.isVisible();
+    repere  = h.isRepere();
+    this->setFixedSize(h.Personnage::getL(),h.Personnage::getH());
+    setPixmap(QPixmap("Marios/mario_inactif.png"));
+}
 
 Heros::~Heros() {
 
@@ -30,6 +34,7 @@ Heros::~Heros() {
     return *this;
 }*/
 
+/* permet de deplacer le personnage principal et verifie certains criteres */
 void Heros::seDeplacer(int direction) {
     switch(direction)
     {
@@ -118,7 +123,7 @@ void Heros::setAxeY(bool axe)
     this->axeY = axe;
     this->setAxeX(axe);
 }
-
+/* appel a cette methode pour chnager les sprites */
 void Heros::remplacerSprite(int numPhoto)
 {
     switch(numPhoto)

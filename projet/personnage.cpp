@@ -21,17 +21,29 @@ Personnage::~Personnage() {
     delete id;
 }
 
-/*Personnage::Personnage(const Personnage &p) : QLabel(p.parentWidget()) {
+Personnage::Personnage(const Personnage &p) : QLabel(p.parentWidget()) {
     vitesseDeplacement = p.vitesseDeplacement;
-}*/
+    coordonnees = new QPoint(p.getX(),p.getY());
+    l = p.getL();
+    h = p.getH();
+    numImage = 0;
+    id = new int;
+    *id = *(p.getId());
+}
 
-/*Personnage& Personnage::operator=(const Personnage& p) {
+Personnage& Personnage::operator=(const Personnage& p) {
     if (&p != this) {
         vitesseDeplacement = p.vitesseDeplacement;
+        coordonnees = new QPoint(p.getX(),p.getY());
+        l = p.getL();
+        h = p.getH();
+        numImage = 0;
+        id = new int;
+        *id = *(p.getId());
     }
 
     return *this;
-}*/
+}
 
 
 void Personnage::setVitesseDeplacement(int v) {

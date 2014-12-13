@@ -23,8 +23,8 @@ public:
     //x et y valent 0 au départ
     Personnage(int, QWidget*, int=0, int=0, int=0, int=0);
     ~Personnage();
-    //Personnage(const Personnage&);
-    //Personnage& operator=(const Personnage&);
+    Personnage(const Personnage&);
+    Personnage& operator=(const Personnage&);
     virtual void seDeplacer(int) = 0; // mettre un parametre chiffre pour le sens si heros keypressed si ennemis orientationVision
     virtual void remplacerSprite(int)= 0;
     void setVitesseDeplacement(int);

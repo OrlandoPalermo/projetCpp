@@ -27,7 +27,7 @@ Terrain::Terrain() : QWidget()
     listeRepere = new vector<Ennemi*>; // liste des ennemis ayant repere le heros
 
     niveauEnCours = 0;
-    init();
+    init(); // implemente le niveau
 
     //Initialisation et configuration des timers
     //-------------------------------------------
@@ -35,8 +35,7 @@ Terrain::Terrain() : QWidget()
     timer = new QTimer(this); // timer de colission
     timer->setInterval(50); // permet de gérer l'intervalle entre chaque répétitions
 
-    sensTimerRonde = new QTimer(this); // timer pour le changement de direction des ennemis
-    sensTimerRonde->setInterval(500);
+
 
     dureeSensDeplacement = new QTimer(this); //  timer pour la ronde des ennemis
     dureeSensDeplacement->setInterval(50);
@@ -44,8 +43,7 @@ Terrain::Terrain() : QWidget()
     //Liaisons signaux et slots
     //--------------------------
 
-    QObject::connect( timer,                SIGNAL( timeout() ),                this, SLOT(  testColission() ) ) ;
-    QObject::connect( sensTimerRonde,       SIGNAL( timeout() ),                this, SLOT(  changeSensDeplacementEnnemis() ) ) ;
+    QObject::connect( timer,                SIGNAL( timeout() ),                this, SLOT(  testCollision() ) ) ; // test les collisions faites par les ennemis
     QObject::connect( dureeSensDeplacement, SIGNAL( timeout() ),                this, SLOT(  deplacementEnnemis() ) ) ;
     QObject::connect(this,                  SIGNAL(comportementDecor(Decor*)),  this, SLOT(comportementDecorAction(Decor*)));
     QObject::connect(this,                  SIGNAL(toucheParEnnemi()),          this, SLOT(resetNiveau()));
@@ -54,12 +52,14 @@ Terrain::Terrain() : QWidget()
     //---------------------
 
     timer->start();
-    sensTimerRonde->start();
+
     dureeSensDeplacement->start();
 
     //Configuration des boutons
     //--------------------------
     activeKeyE = false;
+
+
 
 }
 Terrain::~Terrain()
@@ -77,7 +77,7 @@ Terrain::~Terrain()
     delete decors;
 }
 
-void Terrain::testColission()
+void Terrain::testCollision()
 {
     int sens = 0;
     bool dejaDedans = false;
@@ -170,15 +170,12 @@ void Terrain::keyPressEvent(QKeyEvent *event)
             }
         }
         break;
-
-
     case Qt::Key_Right :
-    choix = 1;
+        choix = 1;
 
         break;
     case Qt::Key_Left :
         choix = 2;
-
 
         break;
     case Qt::Key_Down :
@@ -187,10 +184,7 @@ void Terrain::keyPressEvent(QKeyEvent *event)
         break;
     case Qt::Key_Up :
         choix = 3;
-        /*if(heros->getX()>= (*decors)[1]->getX())
-        {
-            heros->setAxeY();
-        }*/
+
         break;
 
 
@@ -200,13 +194,10 @@ void Terrain::keyPressEvent(QKeyEvent *event)
     {
         if ( choix == 1 || choix == 2)
         {
-
                 for ( unsigned i = 0 ; i < decors->size() ; i++ )
                         {
-
                             if ((*decors)[i] != dynamic_cast<Mur*>((*decors)[i]))
                             {
-
                                 if (
                                     ( ( heros->getX() + heros->getL() ) < (*decors)[i]->getX() ) || // si le heros se trouve tout à gauche de l'objet
                                     (  heros->getX() > ( (*decors)[i]->getX() + (*decors)[i]->getLargeur() ) ) || // si le heros se trouve tout à droite de l'objet
@@ -230,13 +221,10 @@ void Terrain::keyPressEvent(QKeyEvent *event)
                             }
                              else
                             {
-
-
                                 if ( choix == 1)
                                 {
-
                                 if (
-                                    ( ( heros->getX() + heros->getL() ) < (*decors)[i]->getX() - 6 ) || // si le heros se trouve tout à gauche de l'objet
+                                    ( ( heros->getX() + heros->getL() ) < (*decors)[i]->getX() - (heros->Personnage::getVitesseDeplacement()+1) ) || // si le heros se trouve tout à gauche de l'objet ps:choix du getVitesseDeplacement + 1 car ainsi un coup d'avance sur le deplacement du personnage
                                     (  heros->getX() > ( (*decors)[i]->getX() + (*decors)[i]->getLargeur() ) ) || // si le heros se trouve tout à droite de l'objet
                                     ( ( heros->getY() + heros->getH() ) < (*decors)[i]->getY() ) || // si le heros se trouve au-dessus de l'objet
                                     (  heros->getY() > ( (*decors)[i]->getY() + (*decors)[i]->getHauteur() ) ) // si le heros se trouve en-dessous de l'objet
@@ -254,14 +242,12 @@ void Terrain::keyPressEvent(QKeyEvent *event)
                                     //On casse la boucle car on ne peut rentrer en collision qu'avec un seul décort à la fois
                                     break;
                                 }
-
                                 }
                                 else if ( choix == 2)
                                 {
-
                                     if (
                                         ( ( heros->getX() + heros->getL() ) < (*decors)[i]->getX() ) || // si le heros se trouve tout à gauche de l'objet
-                                        (  heros->getX() > ( (*decors)[i]->getX() + (*decors)[i]->getLargeur() + 6 ) ) || // si le heros se trouve tout à droite de l'objet
+                                        (  heros->getX() > ( (*decors)[i]->getX() + (*decors)[i]->getLargeur() + (heros->Personnage::getVitesseDeplacement()+1) ) ) || // si le heros se trouve tout à droite de l'objet ps:choix du getVitesseDeplacement + 1 car ainsi un coup d'avance sur le deplacement du personnage
                                         ( ( heros->getY() + heros->getH() ) < (*decors)[i]->getY() ) || // si le heros se trouve au-dessus de l'objet
                                         (  heros->getY() > ( (*decors)[i]->getY() + (*decors)[i]->getHauteur() ) ) // si le heros se trouve en-dessous de l'objet
                                         )
@@ -278,15 +264,9 @@ void Terrain::keyPressEvent(QKeyEvent *event)
                                         //On casse la boucle car on ne peut rentrer en collision qu'avec un seul décort à la fois
                                         break;
                                     }
-
                                 }
-
-
                             }
-
-
                         }
-
 
         }
         else if ( choix == 4 )
@@ -296,7 +276,7 @@ void Terrain::keyPressEvent(QKeyEvent *event)
                         if (
                            ( ( heros->getX() + heros->getL() ) < (*decors)[i]->getX() ) || // si le heros se trouve tout à gauche de l'objet
                            (  heros->getX() > ( (*decors)[i]->getX() + (*decors)[i]->getLargeur() ) ) || // si le heros se trouve tout à droite de l'objet
-                           ( ( heros->getY() + heros->getH() ) < (*decors)[i]->getY() - 10 ) || // si le heros se trouve au-dessus de l'objet
+                           ( ( heros->getY() + heros->getH() ) < (*decors)[i]->getY() - (2 * heros->Personnage::getVitesseDeplacement() ) ) || // si le heros se trouve au-dessus de l'objet le 2 * getVitesse est la pour la meme raison que celui du dessus
                            (  heros->getY() > ( (*decors)[i]->getY() + (*decors)[i]->getHauteur()  ) ) // si le heros se trouve en-dessous de l'objet
                            )
                         {
@@ -322,7 +302,7 @@ void Terrain::keyPressEvent(QKeyEvent *event)
                            ( ( heros->getX() + heros->getL() ) < (*decors)[i]->getX() ) || // si le heros se trouve tout à gauche de l'objet
                            (  heros->getX() > ( (*decors)[i]->getX() + (*decors)[i]->getLargeur() ) ) || // si le heros se trouve tout à droite de l'objet
                            ( ( heros->getY() + heros->getH() ) < (*decors)[i]->getY() ) || // si le heros se trouve au-dessus de l'objet
-                           (  heros->getY() > ( (*decors)[i]->getY() + (*decors)[i]->getHauteur() + 10 ) ) // si le heros se trouve en-dessous de l'objet
+                           (  heros->getY() > ( (*decors)[i]->getY() + (*decors)[i]->getHauteur() + (2 * heros->Personnage::getVitesseDeplacement() ) ) ) // si le heros se trouve en-dessous de l'objet le 2 * getVitesse est la pour la meme raison que celui du dessus
                            )
                         {
                             //Remise à zéro de tous les paramètres des comportements
@@ -343,59 +323,16 @@ void Terrain::keyPressEvent(QKeyEvent *event)
         if ( choix >= 1 && choix <= 4 )
             heros->seDeplacer(choix);
 
-
-
-
-
+        debloquerLeJeux(); // permet de debloquer le jeux ( apres le second retour au menu )
     }
+
+
 
 }
 
 void Terrain::messageUtilisateur()
 {
-    QMessageBox::information ( this , "Ca marche ca touche " , "Il y a colission !");
-}
-
-void Terrain::changeSensDeplacementEnnemis()
-{
-    for (unsigned i = 0 ; i < ennemis->size() ; i++ )
-    {
-        /*if ( (*ennemis)[i]->Ennemi::isOrientationVision() == false )
-        {
-            if ( (*ennemis)[i]->Ennemi::getPosXMin() > (*ennemis)[i]->Ennemi::getX() - (*ennemis)[i]->Ennemi::getVitesseDeplacement() - 100  )
-            {
-                (*ennemis)[i]->Ennemi::setOrientationVision(true); // change le sens de la ronde ennemis
-            }
-
-        }
-        else
-        {
-            if ( (*ennemis)[i]->Ennemi::getPosXMax() < (*ennemis)[i]->Ennemi::getX() + (*ennemis)[i]->Ennemi::getL() + (*ennemis)[i]->Ennemi::getVitesseDeplacement() + 100  )
-            {
-                (*ennemis)[i]->Ennemi::setOrientationVision(false); // change le sens de la ronde ennemis
-            }
-
-        }*/
-
-        if ( (*ennemis)[i]->Ennemi::isOrientationVision() == false )
-        {
-            if ( (*ennemis)[i]->Ennemi::getPosXMin() > (*ennemis)[i]->Ennemi::getX() )
-            {
-                (*ennemis)[i]->Ennemi::setOrientationVision(true);
-            }
-        }
-        else
-        {
-            if ( (*ennemis)[i]->Ennemi::getPosXMax() < (*ennemis)[i]->Ennemi::getX() + (*ennemis)[i]->Ennemi::getL() )
-            {
-                (*ennemis)[i]->Ennemi::setOrientationVision(false);
-            }
-        }
-
-
-        //(*ennemis)[i]->Ennemi::setOrientationVision(); => a garder
-
-    }
+    QMessageBox::information ( this , "Ca marche ca touche " , "Il y a collision !");
 }
 
 
@@ -428,14 +365,7 @@ void Terrain::ajouterEnnemisRepere(Ennemi* e)
 void Terrain::keyReleaseEvent(QKeyEvent *event)
 {
     //Utilisation de event->ignore() pour éviter que les sprites ne se bloquent si l'utilisateur reste appuyé
-   /* if(heros->getNumImage()>2 && event->key()==Qt::Key_Right)
-    {
-        heros->setNumImage(0);
-    }
-    if(heros->getNumImage()<=2 && event->key()==Qt::Key_Left)
-    {
-        heros->setNumImage(3);
-    }*/
+
     if(event->isAutoRepeat())
     {
 
@@ -498,7 +428,6 @@ void Terrain::init(int numeroNiveau) {
 
         break;
     case 1:
-
         rafraichirStage(numeroNiveau);
         break;
     default:
@@ -591,8 +520,6 @@ void Terrain::rafraichirStage(int numStage)
         break;
 
 
-
-
     }
 }
 
@@ -615,28 +542,23 @@ bool Terrain::miseEnPause()
 
 void Terrain::bloquerLeJeux()
 {
-    // bloque tous les timers ( car thread différent donc obligation pour la pause )
+    // bloque tous les timers ( car obligation pour la pause )
     timer->blockSignals(true);
-    //temps1 = timer->interval();
-    //timer->Enabled = false;
-    sensTimerRonde->blockSignals(true);
-    //sensTimerRonde->Enabled = false;
+
     dureeSensDeplacement->blockSignals(true);
-    //dureeSensDeplacement->Enabled = false;
+
 }
 
 void Terrain::debloquerLeJeux()
 {
     // debloque tous les timers
     timer->blockSignals(false);
-    //timer->Enabled = true;
-    sensTimerRonde->blockSignals(false);
-    //sensTimerRonde->Enabled = true;
+
     dureeSensDeplacement->blockSignals(false);
-    //dureeSensDeplacement->Enabled = true;
+
 }
 
-void Terrain::retournerPageAccueil()
+void Terrain::retournerPageAccueil()// permet de revenir a notre page de menu
 {
     this->close();
     Menu::getMenu()->show();

@@ -11,8 +11,7 @@ Decor::Decor(string nom, QWidget *parent, int x, int y) : Objet(nom, parent, x, 
     coordonnees->setY(y);
     this->move(*coordonnees);
 
-   // this->setStyleSheet("QLabel {background-color : red;}");
-   // this->setText("APPARAIT!");
+
 }
 
 Decor::~Decor()

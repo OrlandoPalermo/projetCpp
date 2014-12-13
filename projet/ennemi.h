@@ -16,13 +16,13 @@ private:
 public:
     Ennemi(int, QWidget*, int=0, int=0, int=0, int=0, int=0, bool=false,int=0,int=0);
     ~Ennemi();
-    //Ennemi(const Ennemi&);
+    Ennemi(const Ennemi&);
     //Ennemi& operator=(const Ennemi&);
     void setVision(int);
     virtual void remplacerSprite(int)= 0;
     int getVision() const;
     bool isOrientationVision()const;
-    //void setOrientationVision();
+
     void setOrientationVision(bool);
     virtual void seDeplacer(int) = 0;
 

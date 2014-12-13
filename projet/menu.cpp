@@ -38,7 +38,7 @@ Menu::Menu(QWidget *parent) :
 
     instance = this;
 
-    //this->setStyleSheet("background-color:red");
+
 
     QObject::connect(bRules,SIGNAL(clicked()),this,SLOT(showRules()));
     QObject::connect(bCredit,SIGNAL(clicked()),this,SLOT(showCredit()));
@@ -60,7 +60,6 @@ Menu::~Menu()
 
 void Menu::showRules()
 {
-    //instance = this;
     this->hide();
     getPageRegles()->show();
 }

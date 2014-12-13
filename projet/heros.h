@@ -12,7 +12,7 @@ private:
 public:
     Heros(int, QWidget*, int=0, int=0, int=0, int=0, bool=true, bool=false, bool=false, bool=true);
     ~Heros();
-    //Heros(const Heros&);
+    Heros(const Heros&);
     //Heros& operator=(const Heros&);
     void seCacher();
 
