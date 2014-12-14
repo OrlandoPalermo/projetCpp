@@ -58,11 +58,19 @@ SOURCES       = ../projet/main.cpp \
 		../projet/armoire.cpp \
 		../projet/porte.cpp \
 		../projet/mur.cpp \
-		../projet/torche.cpp moc_mainwindow.cpp \
+		../projet/torche.cpp \
+		../projet/credit.cpp \
+		../projet/rules.cpp \
+		../projet/menu.cpp \
+		../projet/history.cpp moc_mainwindow.cpp \
 		moc_personnage.cpp \
 		moc_terrain.cpp \
 		moc_objet.cpp \
-		moc_torche.cpp
+		moc_torche.cpp \
+		moc_credit.cpp \
+		moc_rules.cpp \
+		moc_menu.cpp \
+		moc_history.cpp
 OBJECTS       = main.o \
 		mainwindow.o \
 		personnage.o \
@@ -77,11 +85,19 @@ OBJECTS       = main.o \
 		porte.o \
 		mur.o \
 		torche.o \
+		credit.o \
+		rules.o \
+		menu.o \
+		history.o \
 		moc_mainwindow.o \
 		moc_personnage.o \
 		moc_terrain.o \
 		moc_objet.o \
-		moc_torche.o
+		moc_torche.o \
+		moc_credit.o \
+		moc_rules.o \
+		moc_menu.o \
+		moc_history.o
 DIST          = /Users/orlandopalermo/Qt/5.3/clang_64/mkspecs/features/spec_pre.prf \
 		/Users/orlandopalermo/Qt/5.3/clang_64/mkspecs/qdevice.pri \
 		/Users/orlandopalermo/Qt/5.3/clang_64/mkspecs/features/device_config.prf \
@@ -211,7 +227,11 @@ DIST          = /Users/orlandopalermo/Qt/5.3/clang_64/mkspecs/features/spec_pre.
 		../projet/armoire.cpp \
 		../projet/porte.cpp \
 		../projet/mur.cpp \
-		../projet/torche.cpp
+		../projet/torche.cpp \
+		../projet/credit.cpp \
+		../projet/rules.cpp \
+		../projet/menu.cpp \
+		../projet/history.cpp
 QMAKE_TARGET  = projet
 DESTDIR       = #avoid trailing-slash linebreak
 TARGET        = projet.app/Contents/MacOS/projet
@@ -515,7 +535,7 @@ projet.app/Contents/Info.plist:
 	@sed -e "s,@SHORT_VERSION@,1.0,g" -e "s,@TYPEINFO@,????,g" -e "s,@ICON@,,g" -e "s,@BUNDLEIDENTIFIER@,com.yourcompany.projet,g" -e "s,@EXECUTABLE@,projet,g" -e "s,@TYPEINFO@,????,g" /Users/orlandopalermo/Qt/5.3/clang_64/mkspecs/macx-clang/Info.plist.app >projet.app/Contents/Info.plist
 dist: 
 	@test -d .tmp/projet1.0.0 || mkdir -p .tmp/projet1.0.0
-	$(COPY_FILE) --parents $(DIST) .tmp/projet1.0.0/ && $(COPY_FILE) --parents ../projet/mainwindow.h ../projet/personnage.h ../projet/heros.h ../projet/ennemi.h ../projet/majordhomme.h ../projet/terrain.h ../projet/echelle.h ../projet/armoire.h ../projet/objet.h ../projet/decor.h ../projet/porte.h ../projet/mur.h ../projet/torche.h .tmp/projet1.0.0/ && $(COPY_FILE) --parents ../projet/main.cpp ../projet/mainwindow.cpp ../projet/personnage.cpp ../projet/heros.cpp ../projet/ennemi.cpp ../projet/majordhomme.cpp ../projet/terrain.cpp ../projet/objet.cpp ../projet/decor.cpp ../projet/echelle.cpp ../projet/armoire.cpp ../projet/porte.cpp ../projet/mur.cpp ../projet/torche.cpp .tmp/projet1.0.0/ && $(COPY_FILE) --parents ../projet/mainwindow.ui .tmp/projet1.0.0/ && (cd `dirname .tmp/projet1.0.0` && $(TAR) projet1.0.0.tar projet1.0.0 && $(COMPRESS) projet1.0.0.tar) && $(MOVE) `dirname .tmp/projet1.0.0`/projet1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/projet1.0.0
+	$(COPY_FILE) --parents $(DIST) .tmp/projet1.0.0/ && $(COPY_FILE) --parents ../projet/mainwindow.h ../projet/personnage.h ../projet/heros.h ../projet/ennemi.h ../projet/majordhomme.h ../projet/terrain.h ../projet/echelle.h ../projet/armoire.h ../projet/objet.h ../projet/decor.h ../projet/porte.h ../projet/mur.h ../projet/torche.h ../projet/credit.h ../projet/rules.h ../projet/menu.h ../projet/history.h .tmp/projet1.0.0/ && $(COPY_FILE) --parents ../projet/main.cpp ../projet/mainwindow.cpp ../projet/personnage.cpp ../projet/heros.cpp ../projet/ennemi.cpp ../projet/majordhomme.cpp ../projet/terrain.cpp ../projet/objet.cpp ../projet/decor.cpp ../projet/echelle.cpp ../projet/armoire.cpp ../projet/porte.cpp ../projet/mur.cpp ../projet/torche.cpp ../projet/credit.cpp ../projet/rules.cpp ../projet/menu.cpp ../projet/history.cpp .tmp/projet1.0.0/ && $(COPY_FILE) --parents ../projet/mainwindow.ui .tmp/projet1.0.0/ && (cd `dirname .tmp/projet1.0.0` && $(TAR) projet1.0.0.tar projet1.0.0 && $(COMPRESS) projet1.0.0.tar) && $(MOVE) `dirname .tmp/projet1.0.0`/projet1.0.0.tar.gz . && $(DEL_FILE) -r .tmp/projet1.0.0
 
 
 clean:compiler_clean 
@@ -540,9 +560,9 @@ compiler_objective_c_make_all:
 compiler_objective_c_clean:
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_personnage.cpp moc_terrain.cpp moc_objet.cpp moc_torche.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_personnage.cpp moc_terrain.cpp moc_objet.cpp moc_torche.cpp moc_credit.cpp moc_rules.cpp moc_menu.cpp moc_history.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_personnage.cpp moc_terrain.cpp moc_objet.cpp moc_torche.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_personnage.cpp moc_terrain.cpp moc_objet.cpp moc_torche.cpp moc_credit.cpp moc_rules.cpp moc_menu.cpp moc_history.cpp
 moc_mainwindow.cpp: /Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QMainWindow \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qmainwindow.h \
 		../projet/mainwindow.h
@@ -574,6 +594,7 @@ moc_terrain.cpp: /Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/V
 		../projet/porte.h \
 		../projet/decor.h \
 		../projet/objet.h \
+		../projet/torche.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QTimer \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qtimer.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QKeyEvent \
@@ -610,6 +631,97 @@ moc_torche.cpp: ../projet/decor.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qtimer.h \
 		../projet/torche.h
 	/Users/orlandopalermo/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/orlandopalermo/Qt/5.3/clang_64/mkspecs/macx-clang -I'/Users/orlandopalermo/Documents/School/Helha/3- Third Year/C++/Projet/Code Source/projetCpp/projet' -I/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Headers -I. -F/Users/orlandopalermo/Qt/5.3/clang_64/lib ../projet/torche.h -o moc_torche.cpp
+
+moc_credit.cpp: /Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QWidget \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qwidget.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QLabel \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qlabel.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QVBoxLayout \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qboxlayout.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QPushButton \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qpushbutton.h \
+		../projet/credit.h
+	/Users/orlandopalermo/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/orlandopalermo/Qt/5.3/clang_64/mkspecs/macx-clang -I'/Users/orlandopalermo/Documents/School/Helha/3- Third Year/C++/Projet/Code Source/projetCpp/projet' -I/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Headers -I. -F/Users/orlandopalermo/Qt/5.3/clang_64/lib ../projet/credit.h -o moc_credit.cpp
+
+moc_rules.cpp: /Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QWidget \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qwidget.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QLabel \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qlabel.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QVBoxLayout \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qboxlayout.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QPushButton \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qpushbutton.h \
+		../projet/rules.h
+	/Users/orlandopalermo/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/orlandopalermo/Qt/5.3/clang_64/mkspecs/macx-clang -I'/Users/orlandopalermo/Documents/School/Helha/3- Third Year/C++/Projet/Code Source/projetCpp/projet' -I/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Headers -I. -F/Users/orlandopalermo/Qt/5.3/clang_64/lib ../projet/rules.h -o moc_rules.cpp
+
+moc_menu.cpp: /Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QWidget \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qwidget.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QVBoxLayout \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qboxlayout.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QPushButton \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qpushbutton.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QHBoxLayout \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QPixmap \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/qpixmap.h \
+		../projet/rules.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QLabel \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qlabel.h \
+		../projet/credit.h \
+		../projet/history.h \
+		../projet/terrain.h \
+		../projet/majordhomme.h \
+		../projet/ennemi.h \
+		../projet/personnage.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QPoint \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qpoint.h \
+		../projet/heros.h \
+		../projet/porte.h \
+		../projet/decor.h \
+		../projet/objet.h \
+		../projet/torche.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QTimer \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qtimer.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QKeyEvent \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/qevent.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QMessageBox \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qmessagebox.h \
+		../projet/echelle.h \
+		../projet/armoire.h \
+		../projet/menu.h
+	/Users/orlandopalermo/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/orlandopalermo/Qt/5.3/clang_64/mkspecs/macx-clang -I'/Users/orlandopalermo/Documents/School/Helha/3- Third Year/C++/Projet/Code Source/projetCpp/projet' -I/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Headers -I. -F/Users/orlandopalermo/Qt/5.3/clang_64/lib ../projet/menu.h -o moc_menu.cpp
+
+moc_history.cpp: /Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QWidget \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qwidget.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QVBoxLayout \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qboxlayout.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QHBoxLayout \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QLabel \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qlabel.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QPushButton \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qpushbutton.h \
+		../projet/terrain.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QPixmap \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/qpixmap.h \
+		../projet/majordhomme.h \
+		../projet/ennemi.h \
+		../projet/personnage.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QPoint \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qpoint.h \
+		../projet/heros.h \
+		../projet/porte.h \
+		../projet/decor.h \
+		../projet/objet.h \
+		../projet/torche.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QTimer \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qtimer.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QKeyEvent \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/qevent.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QMessageBox \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qmessagebox.h \
+		../projet/echelle.h \
+		../projet/armoire.h \
+		../projet/history.h
+	/Users/orlandopalermo/Qt/5.3/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -I/Users/orlandopalermo/Qt/5.3/clang_64/mkspecs/macx-clang -I'/Users/orlandopalermo/Documents/School/Helha/3- Third Year/C++/Projet/Code Source/projetCpp/projet' -I/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Headers -I/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Headers -I/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Headers -I. -F/Users/orlandopalermo/Qt/5.3/clang_64/lib ../projet/history.h -o moc_history.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -652,6 +764,7 @@ main.o: ../projet/main.cpp ../projet/mainwindow.h \
 		../projet/porte.h \
 		../projet/decor.h \
 		../projet/objet.h \
+		../projet/torche.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QTimer \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qtimer.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QKeyEvent \
@@ -659,7 +772,16 @@ main.o: ../projet/main.cpp ../projet/mainwindow.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QMessageBox \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qmessagebox.h \
 		../projet/echelle.h \
-		../projet/armoire.h
+		../projet/armoire.h \
+		../projet/menu.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QVBoxLayout \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qboxlayout.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QPushButton \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qpushbutton.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QHBoxLayout \
+		../projet/rules.h \
+		../projet/credit.h \
+		../projet/history.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../projet/main.cpp
 
 mainwindow.o: ../projet/mainwindow.cpp ../projet/mainwindow.h \
@@ -718,7 +840,41 @@ majordhomme.o: ../projet/majordhomme.cpp ../projet/majordhomme.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qthread.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o majordhomme.o ../projet/majordhomme.cpp
 
-terrain.o: ../projet/terrain.cpp 
+terrain.o: ../projet/terrain.cpp ../projet/mur.h \
+		../projet/decor.h \
+		../projet/objet.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QWidget \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qwidget.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QLabel \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qlabel.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QPoint \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qpoint.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QPixmap \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/qpixmap.h \
+		../projet/menu.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QVBoxLayout \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qboxlayout.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QPushButton \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qpushbutton.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QHBoxLayout \
+		../projet/rules.h \
+		../projet/credit.h \
+		../projet/history.h \
+		../projet/terrain.h \
+		../projet/majordhomme.h \
+		../projet/ennemi.h \
+		../projet/personnage.h \
+		../projet/heros.h \
+		../projet/porte.h \
+		../projet/torche.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QTimer \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qtimer.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QKeyEvent \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/qevent.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QMessageBox \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qmessagebox.h \
+		../projet/echelle.h \
+		../projet/armoire.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o terrain.o ../projet/terrain.cpp
 
 objet.o: ../projet/objet.cpp ../projet/objet.h \
@@ -811,6 +967,150 @@ torche.o: ../projet/torche.cpp ../projet/torche.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qtimer.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o torche.o ../projet/torche.cpp
 
+credit.o: ../projet/credit.cpp ../projet/credit.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QWidget \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qwidget.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QLabel \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qlabel.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QVBoxLayout \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qboxlayout.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QPushButton \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qpushbutton.h \
+		../projet/menu.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QHBoxLayout \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QPixmap \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/qpixmap.h \
+		../projet/rules.h \
+		../projet/history.h \
+		../projet/terrain.h \
+		../projet/majordhomme.h \
+		../projet/ennemi.h \
+		../projet/personnage.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QPoint \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qpoint.h \
+		../projet/heros.h \
+		../projet/porte.h \
+		../projet/decor.h \
+		../projet/objet.h \
+		../projet/torche.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QTimer \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qtimer.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QKeyEvent \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/qevent.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QMessageBox \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qmessagebox.h \
+		../projet/echelle.h \
+		../projet/armoire.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o credit.o ../projet/credit.cpp
+
+rules.o: ../projet/rules.cpp ../projet/rules.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QWidget \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qwidget.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QLabel \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qlabel.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QVBoxLayout \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qboxlayout.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QPushButton \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qpushbutton.h \
+		../projet/menu.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QHBoxLayout \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QPixmap \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/qpixmap.h \
+		../projet/credit.h \
+		../projet/history.h \
+		../projet/terrain.h \
+		../projet/majordhomme.h \
+		../projet/ennemi.h \
+		../projet/personnage.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QPoint \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qpoint.h \
+		../projet/heros.h \
+		../projet/porte.h \
+		../projet/decor.h \
+		../projet/objet.h \
+		../projet/torche.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QTimer \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qtimer.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QKeyEvent \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/qevent.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QMessageBox \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qmessagebox.h \
+		../projet/echelle.h \
+		../projet/armoire.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o rules.o ../projet/rules.cpp
+
+menu.o: ../projet/menu.cpp ../projet/menu.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QWidget \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qwidget.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QVBoxLayout \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qboxlayout.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QPushButton \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qpushbutton.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QHBoxLayout \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QPixmap \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/qpixmap.h \
+		../projet/rules.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QLabel \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qlabel.h \
+		../projet/credit.h \
+		../projet/history.h \
+		../projet/terrain.h \
+		../projet/majordhomme.h \
+		../projet/ennemi.h \
+		../projet/personnage.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QPoint \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qpoint.h \
+		../projet/heros.h \
+		../projet/porte.h \
+		../projet/decor.h \
+		../projet/objet.h \
+		../projet/torche.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QTimer \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qtimer.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QKeyEvent \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/qevent.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QMessageBox \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qmessagebox.h \
+		../projet/echelle.h \
+		../projet/armoire.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o menu.o ../projet/menu.cpp
+
+history.o: ../projet/history.cpp ../projet/history.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QWidget \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qwidget.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QVBoxLayout \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qboxlayout.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QHBoxLayout \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QLabel \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qlabel.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QPushButton \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qpushbutton.h \
+		../projet/terrain.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QPixmap \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/qpixmap.h \
+		../projet/majordhomme.h \
+		../projet/ennemi.h \
+		../projet/personnage.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QPoint \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qpoint.h \
+		../projet/heros.h \
+		../projet/porte.h \
+		../projet/decor.h \
+		../projet/objet.h \
+		../projet/torche.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/QTimer \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtCore.framework/Versions/5/Headers/qtimer.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/QKeyEvent \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtGui.framework/Versions/5/Headers/qevent.h \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QMessageBox \
+		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qmessagebox.h \
+		../projet/echelle.h \
+		../projet/armoire.h \
+		../projet/menu.h \
+		../projet/rules.h \
+		../projet/credit.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o history.o ../projet/history.cpp
+
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
 
@@ -825,6 +1125,18 @@ moc_objet.o: moc_objet.cpp
 
 moc_torche.o: moc_torche.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_torche.o moc_torche.cpp
+
+moc_credit.o: moc_credit.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_credit.o moc_credit.cpp
+
+moc_rules.o: moc_rules.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_rules.o moc_rules.cpp
+
+moc_menu.o: moc_menu.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_menu.o moc_menu.cpp
+
+moc_history.o: moc_history.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_history.o moc_history.cpp
 
 ####### Install
 

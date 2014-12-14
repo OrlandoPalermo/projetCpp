@@ -6,41 +6,35 @@ Menu::Menu(QWidget *parent) :
     QWidget(parent)
 {
 
-
     QPalette palette;
     palette.setBrush(this->backgroundRole(), QBrush(QImage("Images/bck.png")));
 
 
     this->setPalette(palette);
 
-
-    //vBox = new QVBoxLayout(this);
-    //vBox->setAlignment(this,Qt::AlignBottom);
     hBox = new QHBoxLayout(this);
     hBox->setAlignment(Qt::AlignBottom);
+    hBox->setContentsMargins(40, 20, 10, 5);
+
+    bPlay = new QLabel(this);
+    bPlay->setPixmap(QPixmap("Images/boutons/bPlay.png"));
+    bPlay->move(0, 150);
+    bPlay->setCursor(Qt::PointingHandCursor);
+
+    bCredit = new QLabel(this);
+    bCredit->setPixmap(QPixmap("Images/boutons/bCredits.png"));
+    bCredit->setCursor(Qt::PointingHandCursor);
+
+    bRules = new QLabel(this);
+    bRules->setPixmap(QPixmap("Images/boutons/bRules.png"));
+    bRules->setCursor(Qt::PointingHandCursor);
+
+    bExit = new QLabel(this);
+    bExit->setPixmap(QPixmap("Images/boutons/bExit.png"));
+    bExit->setCursor(Qt::PointingHandCursor);
 
 
-    bPlay = new QPushButton(this);
-    bPlay->setIcon(QIcon("Images/boutons/bPlay.png"));
-    bPlay->setIconSize(QSize(62,40));
 
-    bCredit = new QPushButton(this);
-    bCredit->setIcon(QIcon("Images/boutons/bCredits.png"));
-    bCredit->setIconSize(QSize(62,40));
-
-    bRules = new QPushButton(this);
-    bRules->resize(62,40);
-    bRules->setIcon(QIcon("Images/boutons/bRules.png"));
-    bRules->setIconSize(QSize(62,40));
-
-    bExit = new QPushButton(this);
-
-    bExit->resize(62,40);
-    bExit->setIcon(QPixmap("Images/boutons/bExit.png"));
-    bExit->setIconSize(QSize(62,40));
-
-
-   // vBox->addLayout(hBox);
     hBox->addWidget(bPlay);
     hBox->addWidget(bCredit);
     hBox->addWidget(bRules);
@@ -59,12 +53,14 @@ Menu::Menu(QWidget *parent) :
     this->setWindowIcon(QIcon("Images/iconJeu.png"));
     instance = this;
 
-    //this->setStyleSheet("background-color:red");
+    //On installe un filtre sur chacun des boutons
+    bPlay->installEventFilter(this);
+    bRules->installEventFilter(this);
+    bCredit->installEventFilter(this);
+    bExit->installEventFilter(this);
 
-    QObject::connect(bRules,SIGNAL(clicked()),this,SLOT(showRules()));
-    QObject::connect(bCredit,SIGNAL(clicked()),this,SLOT(showCredit()));
-    QObject::connect(bPlay,SIGNAL(clicked()),this,SLOT(showHistory()));
-    QObject::connect(bExit,SIGNAL(clicked()),this,SLOT(close()));
+    QObject::connect(this, SIGNAL(pressButton(int)), this, SLOT(actionButton(int)));
+
 }
 Menu::~Menu()
 {
@@ -74,20 +70,39 @@ Menu::~Menu()
     delete pageHistory;
 }
 
-void Menu::showRules()
-{
-    //instance = this;
-    this->hide();
-    getPageRegles()->show();
+//Méthode qui envoie un signal quand on clique sur les labels
+bool Menu::eventFilter(QObject *object, QEvent *e) {
+    if (e->type() == QEvent::MouseButtonPress) {
+
+        if (object == bPlay) {
+            emit pressButton(0);
+            return true;
+        }
+        else if (object == bCredit) {
+            emit pressButton(1);
+            return true;
+        }
+
+        else if (object == bRules) {
+            emit pressButton(2);
+            return true;
+        }
+        else if (object == bExit) {
+            emit pressButton(3);
+            return true;
+        }
+    }
+
+    return QObject::eventFilter(object, e);
 }
 
-void Menu::showCredit(){
-    this->close();
-    getPageCredit()->show();
-}
-
-void Menu::showHistory(){
-    this->close();
-    getPageHistory()->show();
+//Permet de décritre les actions des boutons
+void Menu::actionButton(int idButton) {
+    switch(idButton) {
+    case 0: this->close(); getPageHistory()->show(); break;
+    case 1: this->close(); getPageCredit()->show();  break;
+    case 2: this->hide();  getPageRegles()->show();  break;
+    case 3: this->close();                           break;
+    }
 }
 

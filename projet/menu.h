@@ -22,17 +22,15 @@ public:
     Rules* getPageRegles()const{return pageRegles;}
     Credit* getPageCredit()const{return pageCredit;}
     History* getPageHistory()const{return pageHistory;}
-
+    bool eventFilter(QObject *, QEvent *);
 
 
     static Menu* getMenu(){return instance;}
 
 signals:
-
+    void pressButton(int);
 public slots:
-    void showRules();
-    void showCredit();
-    void showHistory();
+    void actionButton(int);
 
 private:
 
@@ -42,15 +40,16 @@ private:
     QHBoxLayout* hBox;
 
     // Run game button
-    QPushButton *bPlay;
+    QLabel *bPlay;
 
     //Credit's button
-    QPushButton *bCredit;
+    QLabel *bCredit;
 
     //Rules button
-    QPushButton *bRules;
+    QLabel *bRules;
 
-    QPushButton *bExit;
+    //Exit button
+    QLabel *bExit;
 
     Rules* pageRegles;
     Credit* pageCredit;
