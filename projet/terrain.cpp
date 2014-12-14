@@ -273,7 +273,11 @@ void Terrain::keyPressEvent(QKeyEvent *event)
             if (niveauEnCours == 2) {
                 if (heros->getX() + heros->getL() > 690 ) {
                     QMessageBox::information(this, "", "Congratulations ! You have just finished the game !");
+                    setCoordDepartHerosX(200);
+                    setCoordDepartHerosY(575);
+
                     niveauSuivant();
+
                     retournerPageAccueil();
                 }
 
@@ -470,8 +474,8 @@ void Terrain::niveauSuivant() {
 }
 
 void Terrain::resetNiveau() {
-    heros->setX(coordDepartHerosX);
-    heros->setY(coordDepartHerosY);
+    heros->setX(getCoordDepartHerosX());
+    heros->setY(getCoordDepartHerosY());
     heros->setAxeY(false);
 }
 
@@ -484,6 +488,7 @@ void Terrain::rafraichirStage(int numStage)
         heros->setX(50);  heros->setY(425);// Placement du héros dans le deuxième stage
         labFond->setPixmap(QPixmap("Terrain_2Ref.png")); // Changement du fond de l'image du stage
 
+
         /*(*ennemis)[0]->setX(650);  (*ennemis)[0]->setY(415); //Placement de l'ennemi bas gauche
         (*ennemis)[1]->setX(900);  (*ennemis)[1]->setY(635); //Placement de l'ennemi bas droite
 
@@ -493,14 +498,14 @@ void Terrain::rafraichirStage(int numStage)
             delete (*ennemis)[i];
         ennemis->clear();
 
-        ennemis->push_back(new Majordhomme(2,this,650,415,51,50,10,false,650,750)); // Création d'un nouvel ennemi ajouté sur la map
+        ennemis->push_back(new Majordhomme(2,this,650,415,51,50,10,false,650,950)); // Création d'un nouvel ennemi ajouté sur la map
         (*ennemis)[0]->setVisible(true);
-        ennemis->push_back(new Majordhomme(2,this,900,635,51,50,10,false,800,920));// Création d'un nouvel ennemi ajouté sur la map
+        ennemis->push_back(new Majordhomme(2,this,900,635,51,50,10,false,800,950));// Création d'un nouvel ennemi ajouté sur la map
         (*ennemis)[1]->setVisible(true);
 
         ennemis->push_back(new Majordhomme(2,this,220,635,51,50,10,false,120,270)); // Création d'un nouvel ennemi ajouté sur la map
         (*ennemis)[2]->setVisible(true);
-        ennemis->push_back(new Majordhomme(2,this,653,170,51,50,10,false,580,680));// Création d'un nouvel ennemi ajouté sur la map
+        ennemis->push_back(new Majordhomme(2,this,653,170,51,50,10,false,580,700));// Création d'un nouvel ennemi ajouté sur la map
         (*ennemis)[3]->setVisible(true);
 
         //(*ennemis)[2] -> modifier ses rondes
@@ -526,7 +531,7 @@ void Terrain::rafraichirStage(int numStage)
         (*decors)[3]->setVisible(true);
 
         decors->push_back(new Echelle("Echelle", this, 576, 225));//anciennement 772-473
-        (*decors)[4]->setVisible(true);  (*decors)[4]->Decor::setHeight(200);        (*decors)[4]->Decor::setWidth(32);
+        (*decors)[4]->setVisible(true);  (*decors)[4]->Decor::setHeight(190);        (*decors)[4]->Decor::setWidth(32);
 
         decors->push_back(new Porte("Porte", this, 101, 161));
         (*decors)[5]->setVisible(true);
@@ -552,6 +557,8 @@ void Terrain::rafraichirStage(int numStage)
         decors->push_back(new Mur("Mur",this,450,425,80,100));
         (*decors)[12]->setVisible(true);
 
+        setCoordDepartHerosX(50);
+        setCoordDepartHerosY(425);
         break;
 
 
@@ -600,3 +607,14 @@ void Terrain::retournerPageAccueil()// permet de revenir a notre page de menu
 
 }
 
+
+void Terrain::setCoordDepartHerosX(int c)
+{
+    if ( c > 0 && c < 950)
+    coordDepartHerosX = c;
+}
+void Terrain::setCoordDepartHerosY(int c)
+{
+    if ( c > 0 && c < 710)
+    coordDepartHerosY = c;
+}

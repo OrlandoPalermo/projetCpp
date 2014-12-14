@@ -56,6 +56,13 @@ public:
     void debloquerLeJeux();
     void retournerPageAccueil();
 
+    int getCoordDepartHerosX()const{return coordDepartHerosX;}
+    int getCoordDepartHerosY()const{return coordDepartHerosY;}
+
+    void setCoordDepartHerosX(int);
+    void setCoordDepartHerosY(int);
+
+
 signals:
     void comportementDecor(Decor*);
     void toucheParEnnemi();
