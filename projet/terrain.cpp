@@ -484,12 +484,19 @@ void Terrain::rafraichirStage(int numStage)
         heros->setX(50);  heros->setY(425);// Placement du héros dans le deuxième stage
         labFond->setPixmap(QPixmap("Terrain_2Ref.png")); // Changement du fond de l'image du stage
 
-        (*ennemis)[0]->setX(650);  (*ennemis)[0]->setY(415); //Placement de l'ennemi bas gauche
+        /*(*ennemis)[0]->setX(650);  (*ennemis)[0]->setY(415); //Placement de l'ennemi bas gauche
         (*ennemis)[1]->setX(900);  (*ennemis)[1]->setY(635); //Placement de l'ennemi bas droite
 
         (*ennemis)[0]->setPosXMin(650);  (*ennemis)[0]->setPosXMax(750); // modifie les rondes
-        (*ennemis)[1]->setPosXMin(800);  (*ennemis)[1]->setPosXMax(920); // modifie les rondes
+        (*ennemis)[1]->setPosXMin(800);  (*ennemis)[1]->setPosXMax(920); // modifie les rondes*/
+        for (unsigned i(0); i < ennemis->size(); i++)
+            delete (*ennemis)[i];
+        ennemis->clear();
 
+        ennemis->push_back(new Majordhomme(2,this,650,415,51,50,10,false,650,750)); // Création d'un nouvel ennemi ajouté sur la map
+        (*ennemis)[0]->setVisible(true);
+        ennemis->push_back(new Majordhomme(2,this,900,635,51,50,10,false,800,920));// Création d'un nouvel ennemi ajouté sur la map
+        (*ennemis)[1]->setVisible(true);
 
         ennemis->push_back(new Majordhomme(2,this,220,635,51,50,10,false,120,270)); // Création d'un nouvel ennemi ajouté sur la map
         (*ennemis)[2]->setVisible(true);

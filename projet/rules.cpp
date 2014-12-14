@@ -13,18 +13,21 @@ Rules::Rules(QWidget *parent) :
     vBox = new QVBoxLayout(this);
 
     rules = new QLabel(this);
-    rules->setStyleSheet("color: red;");
+    //rules->setStyleSheet("color: red;");
 
-    QString ru = "<b>Rules</b>";
-    rules->setText(ru);
-    rules->setAlignment(Qt::AlignHCenter);
+   // QString ru = "<b>Rules</b>";
+    //rules->setText(ru);
+    //rules->setAlignment(Qt::AlignHCenter);
 
     corpsRules = new QLabel(this);
-    corpsRules->setText("1:\t Save your girlfriend !\n2:\t Do not get caught\n3:\tYou can hide you with the decors, press key 'E'\n");
+    QString content = "1:\t Save your girlfriend !\n2:\t Do not get caught\n3:\tYou can hide in the closets with the 'E' key\n";
+    corpsRules->setStyleSheet("font-weight:bold; background-color : darkblue;  color : lightblue; font-size: 15px;");
+    corpsRules->setFixedHeight(60);
+    corpsRules->setText(content);
     corpsRules->setAlignment(Qt::AlignHCenter);
 
     retourMenuGeneral = new QPushButton(this);
-    retourMenuGeneral->setText("Return menu");
+    retourMenuGeneral->setText("Return to main menu");
 
     vBox->addWidget(rules);
     vBox->addWidget(corpsRules);
@@ -35,7 +38,7 @@ Rules::Rules(QWidget *parent) :
 
     this->setFixedSize(700,400);
     this->setWindowTitle("Infiltrate Love - Rules");
-    this->setWindowIcon(QIcon("D:/Users/Alexandre/Documents/GitHub/projetC++/projetCpp/projet/Images/iconJeu.png"));
+    this->setWindowIcon(QIcon("Images/iconJeu.png"));
 
     QObject::connect(retourMenuGeneral,SIGNAL(clicked()),this,SLOT(afficherMenu()));
 }

@@ -12,11 +12,11 @@ History::History(QWidget *parent) :
     title->setAlignment(Qt::AlignHCenter);
 
     corps = new QLabel(this);
-    corps->setText("Your girlfriend has been grounded by her father.\n You nevertheless decide to meet her as you do not want to miss this rendezvous? \n You go to her house to pick her up. \n You mission, should you choose to accept it, is... to infiltrate her home and free her. \n Be careful, it might not be so easy !");
+    corps->setText("Your girlfriend has been grounded by her father.\n You nevertheless decide to meet her as you do not want to miss this rendezvous. \n You get to her place to pick her up. \n Your mission, should you choose to accept it, is... to infiltrate her home and free her. \n Be careful, it might not be so easy !");
     corps->setAlignment(Qt::AlignHCenter);
 
     retourMenu = new QPushButton(this);
-    retourMenu->setText("Return menu");
+    retourMenu->setText("Return to main menu");
 
     playGame = new QPushButton(this);
     playGame->setText("Play");
@@ -38,7 +38,7 @@ History::History(QWidget *parent) :
     QObject::connect(playGame,SIGNAL(clicked()),this,SLOT(lancerJeu()));
 
     this->setWindowTitle("Infiltrate Love - History");
-    this->setWindowIcon(QIcon("D:/Users/Alexandre/Documents/GitHub/projetC++/projetCpp/projet/Images/iconJeu.png"));
+    this->setWindowIcon(QIcon("Images/iconJeu.png"));
 
 }
 
