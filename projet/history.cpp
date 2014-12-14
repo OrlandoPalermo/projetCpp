@@ -37,7 +37,7 @@ History::History(QWidget *parent) :
     QObject::connect(playGame,SIGNAL(clicked()),this,SLOT(lancerJeu()));
 
     this->setWindowTitle("Infiltrate Love - History");
-    this->setWindowIcon(QIcon("D:/Users/Alexandre/Pictures/iconJeu.png"));
+    this->setWindowIcon(QIcon("D:/Users/Alexandre/Documents/GitHub/projetC++/projetCpp/projet/Images/iconJeu.png"));
 
 }
 

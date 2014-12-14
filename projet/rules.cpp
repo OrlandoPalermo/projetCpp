@@ -3,10 +3,20 @@
 Rules::Rules(QWidget *parent) :
     QWidget(parent)
 {
+
+    QPalette palette;
+    palette.setBrush(this->backgroundRole(), QBrush(QImage("D:/Users/Alexandre/Documents/GitHub/projetC++/projetCpp/projet/Images/bck.png")));
+
+    this->setPalette(palette);
+
+
     vBox = new QVBoxLayout(this);
 
     rules = new QLabel(this);
-    rules->setText("Rules:");
+    rules->setStyleSheet("color: red;");
+
+    QString ru = "<b>Rules</b>";
+    rules->setText(ru);
     rules->setAlignment(Qt::AlignHCenter);
 
     corpsRules = new QLabel(this);
@@ -25,7 +35,7 @@ Rules::Rules(QWidget *parent) :
 
     this->setFixedSize(700,400);
     this->setWindowTitle("Infiltrate Love - Rules");
-    this->setWindowIcon(QIcon("D:/Users/Alexandre/Pictures/iconJeu.png"));
+    this->setWindowIcon(QIcon("D:/Users/Alexandre/Documents/GitHub/projetC++/projetCpp/projet/Images/iconJeu.png"));
 
     QObject::connect(retourMenuGeneral,SIGNAL(clicked()),this,SLOT(afficherMenu()));
 }

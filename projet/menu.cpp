@@ -55,7 +55,7 @@ Menu::Menu(QWidget *parent) :
 
     this->setFixedSize(700,400);
     this->setWindowTitle("Infiltrated love 1- Menu");
-    this->setWindowIcon(QIcon("D:/Users/Alexandre/Documents/Helha/InformatiqueGestion_3/4 - POO/projetCPP/projetCpp/projet/imageJeux/Icon/iconJeu.png"));
+    this->setWindowIcon(QIcon("D:/Users/Alexandre/Documents/GitHub/projetC++/projetCpp/projet/Images/iconJeu.png"));
 
 
     instance = this;

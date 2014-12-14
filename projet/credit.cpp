@@ -5,7 +5,7 @@ Credit::Credit(QWidget *parent) :
     QWidget(parent)
 {
     this->setWindowTitle("Infiltrate Love - Credits");
-    this->setWindowIcon(QIcon("D:/Users/Alexandre/Documents/GitHub/projetC++/projetCpp/projet/ImagesiconJeu.png"));
+    this->setWindowIcon(QIcon("D:/Users/Alexandre/Documents/GitHub/projetC++/projetCpp/projet/Images/iconJeu.png"));
     this->setFixedSize(320,400);
 
     vBox = new QVBoxLayout(this);
