@@ -8,7 +8,7 @@ Menu::Menu(QWidget *parent) :
 
 
     QPalette palette;
-    palette.setBrush(this->backgroundRole(), QBrush(QImage("D:/Users/Alexandre/Documents/GitHub/projetC++/projetCpp/projet/Images/bck.png")));
+    palette.setBrush(this->backgroundRole(), QBrush(QImage("Images/bck.png")));
 
 
     this->setPalette(palette);
@@ -21,22 +21,22 @@ Menu::Menu(QWidget *parent) :
 
 
     bPlay = new QPushButton(this);
-    bPlay->setIcon(QIcon("D:/Users/Alexandre/Documents/GitHub/projetC++/projetCpp/projet/Images/boutons/bPlay.png"));
+    bPlay->setIcon(QIcon("Images/boutons/bPlay.png"));
     bPlay->setIconSize(QSize(62,40));
 
     bCredit = new QPushButton(this);
-    bCredit->setIcon(QIcon("D:/Users/Alexandre/Documents/GitHub/projetC++/projetCpp/projet/Images/boutons/bCredits.png"));
+    bCredit->setIcon(QIcon("Images/boutons/bCredits.png"));
     bCredit->setIconSize(QSize(62,40));
 
     bRules = new QPushButton(this);
     bRules->resize(62,40);
-    bRules->setIcon(QIcon("D:/Users/Alexandre/Documents/GitHub/projetC++/projetCpp/projet/Images/boutons/bRules.png"));
+    bRules->setIcon(QIcon("Images/boutons/bRules.png"));
     bRules->setIconSize(QSize(62,40));
 
     bExit = new QPushButton(this);
 
     bExit->resize(62,40);
-    bExit->setIcon(QPixmap("D:/Users/Alexandre/Documents/GitHub/projetC++/projetCpp/projet/Images/boutons/bExit.png"));
+    bExit->setIcon(QPixmap("Images/boutons/bExit.png"));
     bExit->setIconSize(QSize(62,40));
 
 
@@ -55,7 +55,11 @@ Menu::Menu(QWidget *parent) :
 
     this->setFixedSize(700,400);
     this->setWindowTitle("Infiltrated love 1- Menu");
+<<<<<<< HEAD
     this->setWindowIcon(QIcon("D:/Users/Alexandre/Documents/GitHub/projetC++/projetCpp/projet/Images/iconJeu.png"));
+=======
+    this->setWindowIcon(QIcon("Images/iconJeu.png"));
+>>>>>>> origin/master
 
 
     instance = this;
@@ -69,17 +73,10 @@ Menu::Menu(QWidget *parent) :
 }
 Menu::~Menu()
 {
-    delete bPlay;
-    delete bCredit;
-    delete bRules;
-    delete hBox;
-    //delete vBox;
 
     delete pageRegles;
     delete pageCredit;
     delete pageHistory;
-
-    delete instance;
 }
 
 void Menu::showRules()

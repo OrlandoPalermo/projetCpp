@@ -5,6 +5,7 @@ History::History(QWidget *parent) :
     QWidget(parent)
 {
     vBox = new QVBoxLayout(this);
+   // bodyLayout = new QVBoxLayout(vBox);
 
     title = new QLabel(this);
     title->setText("History");
@@ -23,7 +24,7 @@ History::History(QWidget *parent) :
     vBox->addWidget(title);
     vBox->addWidget(corps);
 
-    hBox = new QHBoxLayout(this);
+    hBox = new QHBoxLayout;
 
     hBox->addWidget(retourMenu);
     hBox->addWidget(playGame);
@@ -45,12 +46,10 @@ History::~History(){
     delete retourMenu;
     delete playGame;
 
-    delete hBox;
 
     delete corps;
     delete title;
 
-    delete vBox;
 }
 
 void History::afficherMenu(){
