@@ -38,7 +38,7 @@ private:
 
     static Menu* instance;
 
-    QVBoxLayout* vBox;
+    //QVBoxLayout* vBox;
     QHBoxLayout* hBox;
 
     // Run game button
@@ -49,6 +49,8 @@ private:
 
     //Rules button
     QPushButton *bRules;
+
+    QPushButton *bExit;
 
     Rules* pageRegles;
     Credit* pageCredit;

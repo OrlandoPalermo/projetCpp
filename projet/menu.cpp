@@ -5,26 +5,48 @@ Menu* Menu::instance = NULL;
 Menu::Menu(QWidget *parent) :
     QWidget(parent)
 {
-    QPixmap("D:/Users/Alexandre/Pictures/menuBck.png");
 
 
-    vBox = new QVBoxLayout(this);
+    QPalette palette;
+    palette.setBrush(this->backgroundRole(), QBrush(QImage("D:/Users/Alexandre/Documents/GitHub/projetC++/projetCpp/projet/Images/bck.png")));
+
+
+    this->setPalette(palette);
+
+
+    //vBox = new QVBoxLayout(this);
+    //vBox->setAlignment(this,Qt::AlignBottom);
     hBox = new QHBoxLayout(this);
+    hBox->setAlignment(Qt::AlignBottom);
+
 
     bPlay = new QPushButton(this);
-    bPlay->setText("Play");
+    bPlay->setIcon(QIcon("D:/Users/Alexandre/Documents/GitHub/projetC++/projetCpp/projet/Images/boutons/bPlay.png"));
+    bPlay->setIconSize(QSize(62,40));
 
     bCredit = new QPushButton(this);
-    bCredit->setText("Credits");
+    bCredit->setIcon(QIcon("D:/Users/Alexandre/Documents/GitHub/projetC++/projetCpp/projet/Images/boutons/bCredits.png"));
+    bCredit->setIconSize(QSize(62,40));
 
     bRules = new QPushButton(this);
-    bRules->setText("Rules");
+    bRules->resize(62,40);
+    bRules->setIcon(QIcon("D:/Users/Alexandre/Documents/GitHub/projetC++/projetCpp/projet/Images/boutons/bRules.png"));
+    bRules->setIconSize(QSize(62,40));
 
-    vBox->addWidget(bPlay);
-    vBox->addWidget(bCredit);
-    vBox->addWidget(bRules);
+    bExit = new QPushButton(this);
 
-    setLayout(vBox);
+    bExit->resize(62,40);
+    bExit->setIcon(QPixmap("D:/Users/Alexandre/Documents/GitHub/projetC++/projetCpp/projet/Images/boutons/bExit.png"));
+    bExit->setIconSize(QSize(62,40));
+
+
+   // vBox->addLayout(hBox);
+    hBox->addWidget(bPlay);
+    hBox->addWidget(bCredit);
+    hBox->addWidget(bRules);
+    hBox->addWidget(bExit);
+
+    setLayout(hBox);
 
 
     pageRegles = new Rules();
@@ -32,24 +54,26 @@ Menu::Menu(QWidget *parent) :
     pageHistory = new History();
 
     this->setFixedSize(700,400);
-    this->setWindowTitle("Infiltrate Love - Menu");
-    this->setWindowIcon(QIcon("D:/Users/Alexandre/Pictures/iconJeu.png"));
+    this->setWindowTitle("Infiltrated love 1- Menu");
+    this->setWindowIcon(QIcon("D:/Users/Alexandre/Documents/Helha/InformatiqueGestion_3/4 - POO/projetCPP/projetCpp/projet/imageJeux/Icon/iconJeu.png"));
 
 
     instance = this;
 
-
+    //this->setStyleSheet("background-color:red");
 
     QObject::connect(bRules,SIGNAL(clicked()),this,SLOT(showRules()));
     QObject::connect(bCredit,SIGNAL(clicked()),this,SLOT(showCredit()));
     QObject::connect(bPlay,SIGNAL(clicked()),this,SLOT(showHistory()));
+    QObject::connect(bExit,SIGNAL(clicked()),this,SLOT(close()));
 }
 Menu::~Menu()
 {
     delete bPlay;
     delete bCredit;
     delete bRules;
-    delete vBox;
+    delete hBox;
+    //delete vBox;
 
     delete pageRegles;
     delete pageCredit;
@@ -60,6 +84,7 @@ Menu::~Menu()
 
 void Menu::showRules()
 {
+    //instance = this;
     this->hide();
     getPageRegles()->show();
 }
