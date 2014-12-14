@@ -787,7 +787,7 @@ main.o: ../projet/main.cpp ../projet/mainwindow.h \
 mainwindow.o: ../projet/mainwindow.cpp ../projet/mainwindow.h \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/QMainWindow \
 		/Users/orlandopalermo/Qt/5.3/clang_64/lib/QtWidgets.framework/Versions/5/Headers/qmainwindow.h \
-		ui_mainwindow.h
+		../projet/ui_mainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../projet/mainwindow.cpp
 
 personnage.o: ../projet/personnage.cpp ../projet/personnage.h \

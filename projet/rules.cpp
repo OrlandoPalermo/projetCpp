@@ -5,7 +5,7 @@ Rules::Rules(QWidget *parent) :
 {
 
     QPalette palette;
-    palette.setBrush(this->backgroundRole(), QBrush(QImage("D:/Users/Alexandre/Documents/GitHub/projetC++/projetCpp/projet/Images/bck.png")));
+    palette.setBrush(this->backgroundRole(), QBrush(QImage("Images/bck.png")));
 
     this->setPalette(palette);
 

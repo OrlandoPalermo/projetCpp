@@ -268,6 +268,19 @@ void Terrain::keyPressEvent(QKeyEvent *event)
                             }
                         }
 
+                //Collision avec la princesse
+                //Activation du retour au menu !
+            if (niveauEnCours == 2) {
+                if (heros->getX() + heros->getL() > 690 ) {
+                    QMessageBox::information(this, "", "Congratulations ! You have just finished the game !");
+                    niveauSuivant();
+                    retournerPageAccueil();
+                }
+
+
+
+            }
+
         }
         else if ( choix == 4 )
         {
@@ -416,10 +429,13 @@ void Terrain::init(int numeroNiveau) {
         coordDepartHerosX = 200;
         coordDepartHerosY = 575;
 
+        heros->setX(200); heros->setY(575);
         labFond->setPixmap(QPixmap("Terrain_1Ref.png"));
 
         ennemis->push_back(new Majordhomme(2,this,700,400,51,50,10,false,610,750));
         ennemis->push_back(new Majordhomme(2,this,870,565,51,50,10,false,770,920));
+        (*ennemis)[0]->setVisible(true);
+        (*ennemis)[1]->setVisible(true);
 
 
         decors->push_back(new Armoire("Armoire", this, 672, 530));
@@ -430,8 +446,21 @@ void Terrain::init(int numeroNiveau) {
     case 1:
         rafraichirStage(numeroNiveau);
         break;
+    case 2:
+        heros->setX(100);  heros->setY(615);
+        for (unsigned i(0); i < decors->size(); i++)
+            delete (*decors)[i];
+        decors->clear();
+        for (unsigned i(0); i < ennemis->size(); i++)
+            delete (*ennemis)[i];
+        ennemis->clear();
+        labFond->setPixmap(QPixmap("Terrain_3Ref.png"));
+
+
+        break;
     default:
         init();
+        niveauEnCours = 0;
         break;
     }
 }
@@ -451,9 +480,8 @@ void Terrain::rafraichirStage(int numStage)
     switch(numStage)
     {
     case 1 :
-        coordDepartHerosX = 50; coordDepartHerosY = 420; // Remise à zéro des coordonnées de départ du héros
+        //coordDepartHerosX = 50; coordDepartHerosY = 420; // Remise à zéro des coordonnées de départ du héros
         heros->setX(50);  heros->setY(425);// Placement du héros dans le deuxième stage
-
         labFond->setPixmap(QPixmap("Terrain_2Ref.png")); // Changement du fond de l'image du stage
 
         (*ennemis)[0]->setX(650);  (*ennemis)[0]->setY(415); //Placement de l'ennemi bas gauche
