@@ -9,13 +9,9 @@ class Decor : public Objet
 {
 private:
     virtual void abstract() = 0;
-    QPoint *coordonnees;
 public:
     Decor(std::string, QWidget *, int, int);
-    ~Decor();
 
-    int getX();
-    int getY();
     void setHeight(int);
     void setWidth(int);
 

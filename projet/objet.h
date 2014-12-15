@@ -17,7 +17,7 @@ private:
     virtual void abstract() = 0;
 public:
     Objet(std::string, QWidget *, int, int);
-    ~Objet();
+    virtual ~Objet();
     Objet(const Objet&);
     Objet& operator=(const Objet&);
     void setNom(std::string);

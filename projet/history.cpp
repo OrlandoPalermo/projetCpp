@@ -51,12 +51,6 @@ History::History(QWidget *parent) :
 }
 
 History::~History(){
-    delete retourMenu;
-    delete playGame;
-
-
-    delete corps;
-    delete title;
 
 }
 

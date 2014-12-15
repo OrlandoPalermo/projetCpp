@@ -33,10 +33,7 @@ Credit::Credit(QWidget *parent) :
 }
 
 Credit::~Credit(){
-    delete title;
-    delete corps;
-    delete retourMenu;
-    delete vBox;
+
 }
 
 void Credit::afficherMenu(){

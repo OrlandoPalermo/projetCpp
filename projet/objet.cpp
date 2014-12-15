@@ -1,5 +1,5 @@
 #include "objet.h"
-
+#include <iostream>
 using std::string;
 
 Objet::Objet(string nom, QWidget *parent, int x, int y) : QLabel(parent)
@@ -12,15 +12,21 @@ Objet::Objet(string nom, QWidget *parent, int x, int y) : QLabel(parent)
     QObject::connect(this, SIGNAL(coordonneesChanged()), this, SLOT(coordonneesMaj()));
 }
 
-Objet::~Objet() {}
+Objet::~Objet() {
+    std::cout << "ok suppr !" << std::endl;
+    delete coordonnees;
+}
 
 Objet::Objet(const Objet &o) : QLabel(o.parentWidget()) {
     nom = o.nom;
+    coordonnees = new QPoint(o.coordonnees->x(), o.coordonnees->y());
 }
 
 Objet& Objet::operator=(const Objet& o) {
     if (&o != this) {
+        delete coordonnees;
         nom = o.nom;
+        coordonnees = new QPoint(o.coordonnees->x(), o.coordonnees->y());
     }
 
     return *this;

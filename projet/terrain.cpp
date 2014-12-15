@@ -16,7 +16,7 @@ Terrain::Terrain() : QWidget()
     labFond = new QLabel(this); //QLabel représentant le contenur de l'image de fond du stage
     this->setFixedSize(960,720);
     this->setWindowTitle("Infiltrate Love");
-    this->setWindowIcon(QIcon("D:/Users/Alexandre/Documents/GitHub/projetC++/projetCpp/projet/Images/iconJeu.png"));
+    this->setWindowIcon(QIcon("Images/iconJeu.png"));
 
 
     heros = new Heros(5,this,200,575,23,42,true,false,false,true);
@@ -75,6 +75,7 @@ Terrain::~Terrain()
     delete ennemis;
     delete listeRepere;
     delete decors;
+    delete labFond;
 }
 
 void Terrain::testCollision()
