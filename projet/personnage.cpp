@@ -19,6 +19,7 @@ Personnage::Personnage(int vDepl, QWidget *parent, int x, int y, int l, int h) :
 
 Personnage::~Personnage() {
     delete id;
+    delete coordonnees;
 }
 
 Personnage::Personnage(const Personnage &p) : QLabel(p.parentWidget()) {

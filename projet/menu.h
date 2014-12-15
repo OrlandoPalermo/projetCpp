@@ -6,6 +6,7 @@
 #include <QPushButton>
 #include <QHBoxLayout>
 #include <QPixmap>
+#include <QSound>
 
 #include "rules.h"
 #include "credit.h"

@@ -186,7 +186,9 @@ Makefile: ..\projet\projet.pro C:\Qt\Qt5.3.2\5.3\msvc2013\mkspecs\win32-msvc2013
 		..\projet\projet.pro \
 		C:/Qt/Qt5.3.2/5.3/msvc2013/lib/qtmaind.prl \
 		C:/Qt/Qt5.3.2/5.3/msvc2013/lib/Qt5Cored.prl \
+		C:/Qt/Qt5.3.2/5.3/msvc2013/lib/Qt5Multimedia.prl \
 		C:/Qt/Qt5.3.2/5.3/msvc2013/lib/Qt5Widgets.prl \
+		C:/Qt/Qt5.3.2/5.3/msvc2013/lib/Qt5Network.prl \
 		C:/Qt/Qt5.3.2/5.3/msvc2013/lib/Qt5Gui.prl \
 		C:/Qt/Qt5.3.2/5.3/msvc2013/lib/Qt5Core.prl \
 		C:/Qt/Qt5.3.2/5.3/msvc2013/lib/libEGLd.prl \
@@ -305,7 +307,9 @@ C:\Qt\Qt5.3.2\5.3\msvc2013\mkspecs\features\lex.prf:
 ..\projet\projet.pro:
 C:/Qt/Qt5.3.2/5.3/msvc2013/lib/qtmaind.prl:
 C:/Qt/Qt5.3.2/5.3/msvc2013/lib/Qt5Cored.prl:
+C:/Qt/Qt5.3.2/5.3/msvc2013/lib/Qt5Multimedia.prl:
 C:/Qt/Qt5.3.2/5.3/msvc2013/lib/Qt5Widgets.prl:
+C:/Qt/Qt5.3.2/5.3/msvc2013/lib/Qt5Network.prl:
 C:/Qt/Qt5.3.2/5.3/msvc2013/lib/Qt5Gui.prl:
 C:/Qt/Qt5.3.2/5.3/msvc2013/lib/Qt5Core.prl:
 C:/Qt/Qt5.3.2/5.3/msvc2013/lib/libEGLd.prl:

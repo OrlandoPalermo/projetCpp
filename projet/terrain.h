@@ -12,6 +12,7 @@
 #include <QTimer>
 #include <QKeyEvent>
 #include <QMessageBox>
+#include <QSound>
 
 #include "echelle.h"
 #include "armoire.h"

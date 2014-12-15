@@ -10,10 +10,6 @@ Credit::Credit(QWidget *parent) :
 
     vBox = new QVBoxLayout(this);
 
-   /* title = new QLabel(this);
-    title->setText("Credits:");
-    title->setStyleSheet("font-style : italic;");
-    title->setAlignment(Qt::AlignHCenter);*/
 
     corps = new QLabel(this);
     corps->setText("Created by :\n************* \n\n\n*** PALERMO Orlando ***\n\n\n*** FRAIPONT Anthony *** \n\n\n*** BONNET Leandro ***  \n\n\n*** BROSTEAU Alexandre *** \n\n\n 3IC  2014-2015");

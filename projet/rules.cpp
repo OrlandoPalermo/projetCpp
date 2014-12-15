@@ -45,9 +45,7 @@ Rules::Rules(QWidget *parent) :
 
 Rules::~Rules()
 {
-    delete rules;
-    delete retourMenuGeneral;
-    delete vBox;
+
 }
 void Rules::afficherMenu()
 {

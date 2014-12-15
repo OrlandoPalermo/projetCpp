@@ -75,7 +75,6 @@ Terrain::~Terrain()
     delete ennemis;
     delete listeRepere;
     delete decors;
-    delete labFond;
 }
 
 void Terrain::testCollision()
@@ -109,10 +108,11 @@ void Terrain::testCollision()
                 //-------ATTENTION------- Ici je considère comme être touché par un ennemi !!!
                 //-----------------------
 
+                QSound::play("ToucheEnnemi.wav");
                 emit toucheParEnnemi();
                 heros->setRepere();
                 //listeRepere->push_back((*ennemis)[i]); // rajout d'un ennemis parmis ceux ayant repere le heros
-                for ( unsigned j = 0 ; j < listeRepere->size() ; j++ )
+               /* for ( unsigned j = 0 ; j < listeRepere->size() ; j++ )
                 {
                     if ( (*(*listeRepere)[j]->getId()) == (*(*ennemis)[i]->getId()) ) // teste les ennemis des 2 listes par rapport à leur id
                     {
@@ -120,7 +120,7 @@ void Terrain::testCollision()
                     }
                 }
                 if ( dejaDedans == false ) // si pas encore dedans
-                    ajouterEnnemisRepere((*ennemis)[i]);  // on passe par la méthode qui le rajoute
+                    ajouterEnnemisRepere((*ennemis)[i]);  // on passe par la méthode qui le rajoute*/
             }
         }
 
@@ -162,6 +162,7 @@ void Terrain::keyPressEvent(QKeyEvent *event)
         break;
     case Qt::Key_E:
         if (activeKeyE) {
+            QSound::play("Armoire.wav");
             if (heros->isVisible()) {
                 heros->setVisible(false);
                 heros->setVisibleClasse(false);
@@ -273,6 +274,7 @@ void Terrain::keyPressEvent(QKeyEvent *event)
                 //Activation du retour au menu !
             if (niveauEnCours == 2) {
                 if (heros->getX() + heros->getL() > 690 ) {
+                    QSound::play("Jingle.wav");
                     QMessageBox::information(this, "", "Congratulations ! You have just finished the game !");
                     setCoordDepartHerosX(200);
                     setCoordDepartHerosY(575);

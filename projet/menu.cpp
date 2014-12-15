@@ -99,10 +99,10 @@ bool Menu::eventFilter(QObject *object, QEvent *e) {
 //Permet de décritre les actions des boutons
 void Menu::actionButton(int idButton) {
     switch(idButton) {
-    case 0: this->close(); getPageHistory()->show(); break;
-    case 1: this->close(); getPageCredit()->show();  break;
-    case 2: this->hide();  getPageRegles()->show();  break;
-    case 3: this->close();                           break;
+    case 0: QSound::play("ClicBouton.wav"); this->close(); getPageHistory()->show(); break;
+    case 1: QSound::play("ClicBouton.wav");this->close(); getPageCredit()->show();  break;
+    case 2: QSound::play("ClicBouton.wav");this->hide();  getPageRegles()->show();  break;
+    case 3: QSound::play("ClicBouton.wav");this->close();                           break;
     }
 }
 

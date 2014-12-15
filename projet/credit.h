@@ -20,7 +20,6 @@ public slots:
 
 private:
 
-    QLabel *title;
     QLabel *corps;
     QPushButton *retourMenu;
     QVBoxLayout *vBox;
